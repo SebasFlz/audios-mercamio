@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AUDIOS PROGRAMADOS MERCAMIO PRO</title>
+   <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDu9AivkPbJWswSGkmLj-OKptPqwE3c_j_qA&s" type="image/png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh; font-family: 'Segoe UI', system-ui, sans-serif; 
+      color: #ffffff; padding: 0; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(255, 159, 10, 0.05) 0%, transparent 50%);
+      z-index: 0; pointer-events: none;
+    }
+    .top-bar {
+      background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(20px);
+      border-bottom: 2px solid rgba(255, 159, 10, 0.3); padding: 15px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 200; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+    .logo-section { display: flex; align-items: center; gap: 20px; }
+    .logo-img {
+      height: 50px; width: auto; border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(255, 159, 10, 0.3); object-fit: contain;
+    }
+    .brand-text h1 {
+      font-size: 1.8em; font-weight: 800;
+      background: linear-gradient(135deg, #ff9f0a 0%, #fbbf24 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: 0.5px; margin: 0;
+    }
+    .brand-text p { font-size: 0.85em; color: #94a3b8; margin: 0; font-weight: 500; }
+    .top-actions { display: flex; gap: 12px; }
+    .container { position: relative; z-index: 1; max-width: 1600px; margin: 0 auto; padding: 30px 20px 120px 20px; }
+    .section-header { text-align: center; margin-bottom: 40px; }
+    .section-title { font-size: 2em; font-weight: 700; margin-bottom: 10px; }
+    .section-subtitle { color: #94a3b8; font-size: 1.05em; }
+    .contenedor {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 25px; margin-bottom: 100px;
+    }
+    .caja-audio {
+      background: linear-gradient(145deg, rgba(26, 26, 46, 0.8), rgba(15, 52, 96, 0.6));
+      backdrop-filter: blur(20px); border-radius: 20px; padding: 28px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 159, 10, 0.2);
+      transition: all 0.4s; position: relative; overflow: hidden;
+    }
+    .caja-audio::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #ff9f0a, #fbbf24, #ff9f0a); opacity: 0; transition: opacity 0.3s;
+    }
+    .caja-audio:hover {
+      transform: translateY(-8px); box-shadow: 0 15px 50px rgba(255, 159, 10, 0.2);
+      border-color: rgba(255, 159, 10, 0.4);
+    }
+    .caja-audio:hover::before { opacity: 1; }
+    .audio-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .nombre-audio {
+      font-size: 1.3em; font-weight: 700; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; flex: 1;
+    }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
+      border-radius: 20px; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+    }
+    .status-programado { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .status-activo {
+      background: linear-gradient(135deg, #10b981, #059669);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+    .boton {
+      width: 100%; background: linear-gradient(135deg, rgba(255, 159, 10, 0.2), rgba(251, 191, 36, 0.2));
+      color: #ffffff; border: 1px solid rgba(255, 159, 10, 0.3); border-radius: 12px;
+      padding: 14px 20px; font-size: 14px; font-weight: 600; margin: 10px 0;
+      cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px;
+      position: relative; overflow: hidden;
+    }
+    .boton:hover {
+      background: linear-gradient(135deg, rgba(255, 159, 10, 0.3), rgba(251, 191, 36, 0.3));
+      border-color: #ff9f0a; transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 159, 10, 0.3);
+    }
+    .boton-primary {
+      background: linear-gradient(135deg, #ff9f0a, #fbbf24);
+      border: none; color: #1a1a2e; font-weight: 700;
+    }
+    .boton-primary:hover {
+      background: linear-gradient(135deg, #fbbf24, #ff9f0a);
+      box-shadow: 0 8px 25px rgba(255, 159, 10, 0.4);
+    }
+    .boton-danger {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    input[type="file"] {
+      width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.05);
+      border: 2px dashed rgba(255, 159, 10, 0.3); border-radius: 12px;
+      color: #94a3b8; cursor: pointer; margin: 12px 0; font-size: 13px;
+    }
+    input[type="file"]::file-selector-button {
+      background: linear-gradient(135deg, #ff9f0a, #fbbf24); border: none;
+      padding: 8px 16px; border-radius: 8px; color: #1a1a2e;
+      cursor: pointer; margin-right: 12px; font-weight: 600; font-size: 12px;
+    }
+    input[type="number"], input[type="time"] {
+      width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 159, 10, 0.2); border-radius: 10px;
+      color: #ffffff; font-size: 14px; margin: 8px 0;
+    }
+    input[type="number"]:focus, input[type="time"]:focus {
+      outline: none; border-color: #ff9f0a; background: rgba(255, 159, 10, 0.1);
+    }
+    input[type="range"] {
+      width: 100%; margin: 15px 0; -webkit-appearance: none; background: transparent;
+    }
+    input[type="range"]::-webkit-slider-track {
+      height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 3px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px;
+      background: linear-gradient(135deg, #ff9f0a, #fbbf24);
+      border-radius: 50%; cursor: pointer; margin-top: -6px;
+    }
+    .schedule-controls {
+      background: rgba(0, 0, 0, 0.3); padding: 18px; border-radius: 12px;
+      margin: 18px 0; border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .schedule-controls label {
+      display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600;
+      color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .temporizador {
+      margin-top: 18px; font-size: 1.6em; font-weight: 700; color: #fbbf24;
+      text-align: center; padding: 15px; background: rgba(251, 191, 36, 0.1);
+      border-radius: 12px; border: 1px solid rgba(251, 191, 36, 0.2);
+    }
+    .acordeon button {
+      background: rgba(255, 255, 255, 0.05); color: #ffffff; cursor: pointer;
+      padding: 12px 16px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px; margin-top: 12px; font-weight: 600; font-size: 13px;
+      text-align: left;
+    }
+    .panel {
+      padding: 14px; display: none; background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px; max-height: 200px; overflow-y: auto; margin-top: 8px;
+    }
+    .panel p {
+      padding: 8px; margin: 4px 0; background: rgba(255, 255, 255, 0.03);
+      border-radius: 6px; font-size: 13px; color: #94a3b8;
+    }
+    #playerContainer {
+      position: fixed; top: 0; right: 0; width: 360px; height: 100vh;
+      background: linear-gradient(180deg, rgba(15, 15, 25, 0.98), rgba(10, 10, 20, 0.98));
+      backdrop-filter: blur(20px); border-left: 2px solid rgba(255, 159, 10, 0.3);
+      padding: 30px 25px; overflow-y: auto; box-shadow: -10px 0 50px rgba(0, 0, 0, 0.5);
+      z-index: 150; transition: right 0.5s;
+    }
+    #playerContainer.hidden { right: -400px; }
+    .player-header {
+      text-align: center; margin-bottom: 25px; padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .player-header h3 {
+      font-size: 1.3em; font-weight: 700;
+      background: linear-gradient(135deg, #ff9f0a, #fbbf24);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .playlist-info {
+      text-align: center; margin: 10px 0; font-size: 0.9em; color: #94a3b8;
+    }
+    #controls { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
+    #controls button {
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff; font-size: 20px; cursor: pointer; border-radius: 50%;
+      width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+    }
+    #controls button:hover {
+      background: linear-gradient(135deg, rgba(255, 159, 10, 0.2), rgba(251, 191, 36, 0.2));
+      border-color: #ff9f0a; transform: scale(1.1);
+    }
+    #controls button.active { background: linear-gradient(135deg, #ff9f0a, #fbbf24); color: #1a1a2e; }
+    #playPauseBtn {
+      width: 60px; height: 60px; font-size: 24px;
+      background: linear-gradient(135deg, #ff9f0a, #fbbf24); color: #1a1a2e; border: none;
+    }
+    .track-item {
+      background: rgba(255, 255, 255, 0.04); padding: 12px 14px; border-radius: 10px;
+      margin-bottom: 8px; cursor: pointer; transition: all 0.3s;
+      border: 1px solid transparent; font-size: 13px; color: #94a3b8;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .track-item:hover {
+      background: rgba(255, 159, 10, 0.1); border-color: rgba(255, 159, 10, 0.3);
+      color: #ffffff; transform: translateX(5px);
+    }
+    .track-item.active {
+      background: linear-gradient(135deg, rgba(255, 159, 10, 0.2), rgba(251, 191, 36, 0.2));
+      border-color: #ff9f0a; color: #ffffff; font-weight: 600;
+    }
+    .track-remove {
+      background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444; padding: 4px 8px; border-radius: 6px; font-size: 11px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .track-remove:hover {
+      background: rgba(239, 68, 68, 0.4); transform: scale(1.05);
+    }
+    #playlist { max-height: 250px; overflow-y: auto; margin: 20px 0; }
+    .volume-section {
+      margin: 20px 0; padding: 15px; background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .volume-section label {
+      display: block; font-size: 12px; font-weight: 600; color: #64748b;
+      margin-bottom: 10px; text-transform: uppercase;
+    }
+    footer {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95));
+      backdrop-filter: blur(20px); padding: 20px; text-align: center;
+      border-top: 1px solid rgba(255, 159, 10, 0.2); z-index: 100;
+    }
+    footer p { margin: 0; font-size: 13px; color: #64748b; font-weight: 500; }
+    footer .dev-name {
+      font-weight: 700; background: linear-gradient(135deg, #ff9f0a, #fbbf24);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 14px;
+    }
+    @media (max-width: 768px) {
+      .top-bar { padding: 15px 20px; flex-direction: column; gap: 15px; }
+      #playerContainer { width: 100%; height: auto; position: relative; right: 0; }
+      #playerContainer.hidden { display: none; }
+      .contenedor { grid-template-columns: 1fr; }
+    }
+
+    /* ===== GENERADOR IA ===== */
+    .ia-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px); z-index: 300;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .ia-overlay.hidden { display: none; }
+    .ia-modal {
+      background: linear-gradient(160deg, rgba(26,26,46,0.98), rgba(15,52,96,0.95));
+      border: 1px solid rgba(255,159,10,0.3); border-radius: 20px;
+      padding: 30px; width: 100%; max-width: 560px; max-height: 88vh;
+      overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+    .ia-modal-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .ia-modal-header h3 {
+      background: linear-gradient(135deg, #ff9f0a, #fbbf24);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3em;
+    }
+    .ia-modal-header button {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+      color: #fff; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 16px;
+    }
+    .ia-section { margin-bottom: 20px; }
+    .ia-section label {
+      display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600;
+      color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .ia-hint { font-size: 11px; color: #64748b; margin-top: 4px; }
+    select, textarea {
+      width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,159,10,0.2); border-radius: 10px;
+      color: #fff; font-size: 14px; margin: 6px 0; font-family: inherit;
+    }
+    select:focus, textarea:focus { outline: none; border-color: #ff9f0a; background: rgba(255,159,10,0.1); }
+    .fila-producto {
+      display: flex; gap: 8px; margin-bottom: 8px;
+    }
+    .fila-producto input {
+      padding: 10px 12px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,159,10,0.2); border-radius: 8px; color: #fff; font-size: 13px;
+    }
+    .fila-producto .fp-nombre { flex: 2; }
+    .fila-producto .fp-precio { flex: 1; }
+    .fila-producto button {
+      background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.3);
+      color: #ef4444; border-radius: 8px; padding: 0 12px; cursor: pointer;
+    }
+    #iaStatus { font-size: 13px; margin-top: 12px; min-height: 18px; color: #94a3b8; }
+    #iaStatus.error { color: #ef4444; }
+    #iaStatus.ok { color: #10b981; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="logo-section">
+      <img src="file:///D:/Usuarios/Pictures/MERCAMIO.png" alt="Mercamio" class="logo-img">
+      <div class="brand-text">
+        <h1>MERCAMIO</h1>
+        <p>Sistema de Audio Profesional</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="agregarAudio" class="boton boton-primary">➕ Nuevo Audio</button>
+      <button id="togglePlayerBtn" class="boton">🎵 Reproductor</button>
+      <button id="abrirIABtn" class="boton">🎙️ Generador IA</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Audios Programados</h2>
+      <p class="section-subtitle">Gestiona y programa tus audios de manera profesional</p>
+    </div>
+    <div class="contenedor" id="contenedorAudios"></div>
+  </div>
+
+  <div id="playerContainer">
+    <div class="player-header">
+      <h3>Reproductor de Música</h3>
+      <p>Control central de audio</p>
+    </div>
+    <div class="playlist-info">
+      <span id="playlistCount">0 canciones</span>
+    </div>
+    <div id="controls">
+      <button id="shuffleBtn" title="Aleatorio">🔀</button>
+      <button id="prevBtn" title="Anterior">⏮️</button>
+      <button id="playPauseBtn" title="Play/Pause">▶️</button>
+      <button id="nextBtn" title="Siguiente">⏭️</button>
+      <button id="repeatBtn" title="Repetir">🔁</button>
+    </div>
+    <div class="volume-section">
+      <label>🔊 Volumen</label>
+      <input type="range" id="musicVolume" min="0" max="1" step="0.01" value="0.85">
+    </div>
+    <div id="playlist"></div>
+    <input type="file" id="fileInput" accept="audio/*" multiple style="display:none;">
+    <button class="boton boton-primary" id="addMoreFiles">➕ Agregar Más Música</button>
+    <button class="boton boton-danger" id="clearPlaylist" style="margin-top:10px;">🗑️ Limpiar Lista</button>
+  </div>
+
+  <audio id="musicPlayer"></audio>
+
+  <div id="iaOverlay" class="ia-overlay hidden">
+    <div class="ia-modal">
+      <div class="ia-modal-header">
+        <h3>🎙️ Generador de Anuncios con IA</h3>
+        <button id="cerrarIA">✕</button>
+      </div>
+
+      <div class="ia-section">
+        <button class="boton" id="cargarVoces">🔄 Cargar voces disponibles</button>
+        <select id="vozSelect"><option value="">-- Primero carga las voces --</option></select>
+        <p class="ia-hint">La conexión con ElevenLabs la maneja el servidor de este sitio, no necesitas pegar ninguna key aquí.</p>
+      </div>
+
+      <div class="ia-section">
+        <label>📦 Productos y precios</label>
+        <div id="listaProductos"></div>
+        <button class="boton" id="agregarProducto">➕ Agregar producto</button>
+      </div>
+
+      <div class="ia-section">
+        <label>📅 Promoción válida hasta</label>
+        <input type="date" id="fechaVigencia">
+      </div>
+
+      <button class="boton boton-primary" id="generarTextoBtn">✍️ Generar guion del anuncio</button>
+
+      <div class="ia-section">
+        <label>📝 Guion (puedes editarlo antes de generar el audio)</label>
+        <textarea id="guionAnuncio" rows="5" placeholder="Aquí aparecerá el guion generado..."></textarea>
+      </div>
+
+      <button class="boton boton-primary" id="generarAudioBtn">🔊 Generar y descargar audio</button>
+      <div id="iaStatus"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Desarrollado por <span class="dev-name">Sebastián Flores</span></p>
+    <p style="font-size: 11px; margin-top: 5px; opacity: 0.6;">Audios Programados Mercamio © 2026</p>
+  </footer>
+
+<script>
+// ========== OPTIMIZACIONES Y CORRECCIONES ==========
+
+// Inicialización de AudioContext
+let audioCtx;
+function initAudio() {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!audioCtx && AC) audioCtx = new AC();
+}
+
+// Validación de archivos de audio
+function canPlay(file) {
+  const audio = document.createElement('audio');
+  if (file.type && audio.canPlayType(file.type)) return true;
+  const name = (file.name || '').toLowerCase();
+  return ['.mp3','.wav','.ogg','.m4a','.aac','.flac','.webm','.opus','.3gp'].some(e => name.endsWith(e));
+}
+
+// ========== VARIABLES GLOBALES DEL REPRODUCTOR ==========
+const musicPlayer = document.getElementById('musicPlayer');
+let playlist = [];
+let currentTrack = 0;
+let isPlaying = false;
+let scheduledActiveCount = 0;
+let mainWasPlaying = false;
+const playingScheduled = new Set();
+const floorOrder = [];
+let shuffleMode = false;
+let repeatMode = false;
+
+// ========== GESTIÓN DE LA PLAYLIST (CORREGIDO) ==========
+
+// Función para actualizar el contador de canciones
+function updatePlaylistCount() {
+  document.getElementById('playlistCount').textContent = `${playlist.length} ${playlist.length === 1 ? 'canción' : 'canciones'}`;
+}
+
+// Función para agregar archivos (CORREGIDO - ahora AGREGA en lugar de reemplazar)
+function addFiles(files) {
+  const valid = files.filter(canPlay);
+  if (!valid.length) {
+    alert('No se encontraron archivos de audio compatibles');
+    return;
+  }
+  
+  // CORRECCIÓN: Agregar archivos en lugar de reemplazar
+  const wasEmpty = playlist.length === 0;
+  playlist.push(...valid);
+  
+  // Si la playlist estaba vacía, cargar la primera canción
+  if (wasEmpty) {
+    loadTrack(0);
+  }
+  
+  renderPlaylist();
+  updatePlaylistCount();
+  
+  // Notificación visual
+  showNotification(`✅ ${valid.length} ${valid.length === 1 ? 'canción agregada' : 'canciones agregadas'}`);
+}
+
+// Función para mostrar notificaciones
+function showNotification(message) {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 9999;
+    font-weight: 600;
+    animation: slideIn 0.3s ease-out;
+  `;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => notification.remove(), 300);
+  }, 2000);
+}
+
+// Agregar animaciones CSS
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideIn {
+    from { transform: translateX(400px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(400px); opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
+
+// Función para renderizar la playlist (MEJORADA con botón eliminar)
+function renderPlaylist() {
+  const list = document.getElementById('playlist');
+  list.innerHTML = '';
+  
+  if (playlist.length === 0) {
+    list.innerHTML = '<p style="text-align:center;opacity:0.5;padding:20px;">No hay canciones en la lista</p>';
+    return;
+  }
+  
+  playlist.forEach((f, i) => {
+    const div = document.createElement('div');
+    div.className = 'track-item' + (i === currentTrack ? ' active' : '');
+    
+    const trackName = document.createElement('span');
+    trackName.textContent = f.name;
+    trackName.style.flex = '1';
+    trackName.style.overflow = 'hidden';
+    trackName.style.textOverflow = 'ellipsis';
+    trackName.style.whiteSpace = 'nowrap';
+    
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'track-remove';
+    removeBtn.textContent = '✕';
+    removeBtn.title = 'Eliminar';
+    removeBtn.onclick = (e) => {
+      e.stopPropagation();
+      removeTrack(i);
+    };
+    
+    div.appendChild(trackName);
+    div.appendChild(removeBtn);
+    
+    div.addEventListener('click', function() {
+      currentTrack = i;
+      loadTrack(i);
+      playMusic();
+    });
+    
+    list.appendChild(div);
+  });
+}
+
+// Función para eliminar una canción
+function removeTrack(index) {
+  if (index < 0 || index >= playlist.length) return;
+  
+  const wasPlaying = (index === currentTrack && isPlaying);
+  
+  playlist.splice(index, 1);
+  
+  // Ajustar el índice actual
+  if (currentTrack >= playlist.length) {
+    currentTrack = playlist.length - 1;
+  }
+  
+  renderPlaylist();
+  updatePlaylistCount();
+  
+  // Si estábamos reproduciendo la canción eliminada, cargar la siguiente
+  if (wasPlaying && playlist.length > 0) {
+    loadTrack(currentTrack);
+    playMusic();
+  } else if (playlist.length === 0) {
+    musicPlayer.src = '';
+    isPlaying = false;
+    document.getElementById('playPauseBtn').textContent = '▶️';
+  }
+}
+
+// Función para limpiar toda la playlist
+function clearPlaylist() {
+  if (playlist.length === 0) return;
+  
+  if (confirm(`¿Estás seguro de eliminar las ${playlist.length} canciones?`)) {
+    playlist = [];
+    currentTrack = 0;
+    musicPlayer.pause();
+    musicPlayer.src = '';
+    isPlaying = false;
+    document.getElementById('playPauseBtn').textContent = '▶️';
+    renderPlaylist();
+    updatePlaylistCount();
+    showNotification('🗑️ Lista de reproducción limpiada');
+  }
+}
+
+// Cargar una canción
+function loadTrack(i) {
+  if (!playlist[i]) return;
+  
+  // Revocar URL anterior para liberar memoria
+  if (musicPlayer.src && musicPlayer.src.startsWith('blob:')) {
+    URL.revokeObjectURL(musicPlayer.src);
+  }
+  
+  musicPlayer.src = URL.createObjectURL(playlist[i]);
+  initAudio();
+  musicPlayer.volume = parseFloat(document.getElementById('musicVolume').value);
+  renderPlaylist();
+  
+  if (isPlaying) {
+    playMusic();
+  }
+}
+
+// Reproducir música
+async function playMusic() {
+  if (playlist.length === 0) {
+    alert('Agrega canciones primero');
+    return;
+  }
+  
+  try {
+    await musicPlayer.play();
+    isPlaying = true;
+    document.getElementById('playPauseBtn').textContent = '⏸️';
+  } catch(e) {
+    console.warn('Autoplay bloqueado:', e);
+  }
+}
+
+// Pausar música
+function pauseMusic() {
+  musicPlayer.pause();
+  isPlaying = false;
+  document.getElementById('playPauseBtn').textContent = '▶️';
+}
+
+// ========== EVENTOS DEL REPRODUCTOR ==========
+
+document.getElementById('togglePlayerBtn').addEventListener('click', function() {
+  document.getElementById('playerContainer').classList.toggle('hidden');
+});
+
+// CORREGIDO: El input ahora no reemplaza el valor, mantiene los archivos agregados
+document.getElementById('fileInput').addEventListener('change', function(e) {
+  if (this.files.length > 0) {
+    addFiles(Array.from(this.files));
+    // Limpiar el input para permitir agregar los mismos archivos nuevamente si se desea
+    this.value = '';
+  }
+});
+
+document.getElementById('addMoreFiles').addEventListener('click', function() {
+  document.getElementById('fileInput').click();
+});
+
+document.getElementById('clearPlaylist').addEventListener('click', clearPlaylist);
+
+document.getElementById('musicVolume').addEventListener('input', function() {
+  musicPlayer.volume = parseFloat(this.value);
+});
+
+document.getElementById('playPauseBtn').addEventListener('click', function() {
+  if (isPlaying) pauseMusic(); else playMusic();
+});
+
+document.getElementById('nextBtn').addEventListener('click', function() {
+  if (playlist.length === 0) return;
+  
+  if (shuffleMode) {
+    currentTrack = Math.floor(Math.random() * playlist.length);
+  } else {
+    currentTrack = (currentTrack + 1) % playlist.length;
+  }
+  loadTrack(currentTrack);
+  playMusic();
+});
+
+document.getElementById('prevBtn').addEventListener('click', function() {
+  if (playlist.length === 0) return;
+  
+  currentTrack = currentTrack > 0 ? currentTrack - 1 : playlist.length - 1;
+  loadTrack(currentTrack);
+  playMusic();
+});
+
+document.getElementById('shuffleBtn').addEventListener('click', function() {
+  shuffleMode = !shuffleMode;
+  this.classList.toggle('active', shuffleMode);
+  showNotification(shuffleMode ? '🔀 Modo aleatorio activado' : '➡️ Modo secuencial activado');
+});
+
+document.getElementById('repeatBtn').addEventListener('click', function() {
+  repeatMode = !repeatMode;
+  this.classList.toggle('active', repeatMode);
+  showNotification(repeatMode ? '🔁 Repetición activada' : '▶️ Repetición desactivada');
+});
+
+musicPlayer.addEventListener('ended', function() {
+  if (repeatMode) {
+    musicPlayer.currentTime = 0;
+    playMusic();
+  } else {
+    document.getElementById('nextBtn').click();
+  }
+});
+
+// ========== AUDIOS PROGRAMADOS (OPTIMIZADO) ==========
+
+let contador = 0;
+const intervalos = {};
+const tiemposRestantes = {};
+const historiales = {};
+
+document.getElementById('agregarAudio').addEventListener('click', crearAudio);
+
+function crearAudio() {
+  contador++;
+  const id = contador;
+  const caja = document.createElement('div');
+  caja.className = 'caja-audio';
+  caja.setAttribute('data-audio-id', id);
+  caja.innerHTML = `
+    <div class="audio-header">
+      <div class="nombre-audio">Audio ${id}</div>
+      <span class="status-badge status-programado">⏳ No Iniciado</span>
+    </div>
+    <input type="file" accept="audio/*" id="archivo${id}">
+    <audio id="audio${id}" controls style="width:100%;margin:12px 0" preload="metadata"></audio>
+    <div class="schedule-controls">
+      <label>🕐 Hora de inicio (opcional)</label>
+      <input type="time" id="horaInicio${id}">
+      <label>⏱️ Repetir cada (minutos)</label>
+      <input type="number" id="tiempo${id}" min="1" value="30">
+    </div>
+    <button class="boton boton-primary btn-iniciar" data-id="${id}">▶️ Iniciar Programación</button>
+    <button class="boton boton-danger btn-eliminar" data-id="${id}">🗑️ Eliminar</button>
+    <label style="display:block;font-size:11px;color:#64748b;margin-top:15px;text-transform:uppercase;">🔊 Volumen del Audio</label>
+    <input type="range" min="0" max="1" step="0.01" value="0.85" id="volumen${id}" class="volumen-audio">
+    <div class="temporizador" id="temp${id}">--:--</div>
+    <div class="acordeon">
+      <button class="btn-toggle-panel" data-panel="hist${id}">📝 Historial</button>
+      <div class="panel" id="hist${id}"><p style="text-align:center;opacity:0.5;">Sin reproducciones</p></div>
+    </div>
+  `;
+  
+  document.getElementById('contenedorAudios').appendChild(caja);
+  
+  // Eventos con delegación mejorada
+  setupAudioEvents(id, caja);
+}
+
+function setupAudioEvents(id, caja) {
+  const archivo = document.getElementById(`archivo${id}`);
+  const audio = document.getElementById(`audio${id}`);
+  const volumen = document.getElementById(`volumen${id}`);
+  
+  // Evento de carga de archivo
+  archivo.addEventListener('change', function() {
+    if (this.files[0]) {
+      // Revocar URL anterior
+      if (audio.src && audio.src.startsWith('blob:')) {
+        URL.revokeObjectURL(audio.src);
+      }
+      
+      audio.src = URL.createObjectURL(this.files[0]);
+      audio.volume = parseFloat(volumen.value);
+      caja.querySelector('.nombre-audio').textContent = this.files[0].name;
+    }
+  });
+  
+  // Evento de volumen
+  volumen.addEventListener('input', function() {
+    audio.volume = parseFloat(this.value);
+  });
+  
+  // Botón iniciar
+  caja.querySelector('.btn-iniciar').addEventListener('click', function() {
+    iniciar(id);
+  });
+  
+  // Botón eliminar
+  caja.querySelector('.btn-eliminar').addEventListener('click', function() {
+    eliminar(this);
+  });
+  
+  // Toggle panel
+  caja.querySelector('.btn-toggle-panel').addEventListener('click', function() {
+    togglePanel(this.getAttribute('data-panel'));
+  });
+}
+
+function iniciar(id) {
+  const audio = document.getElementById(`audio${id}`);
+  if (!audio.src || audio.src === window.location.href) {
+    alert('⚠️ Carga un archivo de audio primero');
+    return;
+  }
+  
+  const horaInput = document.getElementById(`horaInicio${id}`);
+  const tiempoMin = parseInt(document.getElementById(`tiempo${id}`).value) || 30;
+  
+  // Limpiar intervalo anterior si existe
+  if (intervalos[id]) {
+    clearInterval(intervalos[id]);
+    delete intervalos[id];
+  }
+  
+  historiales[id] = historiales[id] || [];
+  const caja = document.querySelector(`[data-audio-id="${id}"]`);
+  const badge = caja.querySelector('.status-badge');
+  
+  if (horaInput.value) {
+    const [h, m] = horaInput.value.split(':');
+    const ahora = new Date();
+    const programada = new Date();
+    programada.setHours(parseInt(h), parseInt(m), 0, 0);
+    
+    if (programada <= ahora) {
+      programada.setDate(programada.getDate() + 1);
+    }
+    
+    const delay = programada - ahora;
+    badge.className = 'status-badge status-programado';
+    badge.textContent = `⏳ Inicia ${horaInput.value}`;
+    
+    setTimeout(() => {
+      reproducirAudio(id, audio);
+      badge.className = 'status-badge status-activo';
+      badge.textContent = '🔴 Activo';
+      iniciarIntervalo(id, audio, tiempoMin);
+    }, delay);
+  } else {
+    reproducirAudio(id, audio);
+    badge.className = 'status-badge status-activo';
+    badge.textContent = '🔴 Activo';
+    iniciarIntervalo(id, audio, tiempoMin);
+  }
+}
+
+function iniciarIntervalo(id, audio, min) {
+  const seg = min * 60;
+  tiemposRestantes[id] = seg;
+  
+  // Usar requestAnimationFrame para mejor rendimiento
+  let lastUpdate = Date.now();
+  
+  intervalos[id] = setInterval(() => {
+    const now = Date.now();
+    const elapsed = Math.floor((now - lastUpdate) / 1000);
+    
+    if (elapsed >= 1) {
+      tiemposRestantes[id] -= elapsed;
+      lastUpdate = now;
+      
+      if (tiemposRestantes[id] <= 0) {
+        reproducirAudio(id, audio);
+        tiemposRestantes[id] = seg;
+      }
+      
+      const m = Math.floor(tiemposRestantes[id] / 60);
+      const s = tiemposRestantes[id] % 60;
+      const tempElem = document.getElementById(`temp${id}`);
+      
+      if (tempElem) {
+        tempElem.textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+      }
+    }
+  }, 100); // Actualizar más frecuentemente pero solo cambiar DOM cada segundo
+}
+
+function reproducirAudio(id, audio) {
+  // Gestión de reproducción con el reproductor principal
+  if (!playingScheduled.has(id)) {
+    playingScheduled.add(id);
+    if (scheduledActiveCount === 0) {
+      mainWasPlaying = !musicPlayer.paused;
+      if (mainWasPlaying) pauseMusic();
+    }
+    scheduledActiveCount++;
+  }
+  
+  const idx = floorOrder.indexOf(id);
+  if (idx !== -1) floorOrder.splice(idx, 1);
+  floorOrder.push(id);
+  updateMuting();
+  
+  audio.currentTime = 0;
+  audio.play().catch(err => console.warn('Error al reproducir:', err));
+  
+  // Actualizar historial
+  historiales[id] = historiales[id] || [];
+  historiales[id].push(new Date());
+  
+  const hist = document.getElementById(`hist${id}`);
+  if (hist) {
+    hist.innerHTML = historiales[id].slice(-10).reverse().map(h =>
+      `<p>✅ ${h.toLocaleString('es-CO', {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>`
+    ).join('');
+  }
+  
+  // Cleanup mejorado
+  const cleanup = () => {
+    if (playingScheduled.has(id)) {
+      playingScheduled.delete(id);
+      const idx = floorOrder.indexOf(id);
+      if (idx !== -1) floorOrder.splice(idx, 1);
+      scheduledActiveCount = Math.max(0, scheduledActiveCount - 1);
+      
+      if (scheduledActiveCount === 0 && mainWasPlaying) {
+        playMusic();
+        mainWasPlaying = false;
+      }
+      updateMuting();
+    }
+  };
+  
+  // Remover listeners anteriores
+  audio.removeEventListener('ended', cleanup);
+  audio.removeEventListener('pause', cleanup);
+  audio.addEventListener('ended', cleanup, { once: true });
+  audio.addEventListener('pause', cleanup, { once: true });
+}
+
+function updateMuting() {
+  const current = floorOrder.length > 0 ? floorOrder[floorOrder.length - 1] : null;
+  
+  document.querySelectorAll('.caja-audio audio').forEach(a => {
+    const aid = parseInt(a.id.replace('audio',''));
+    if (playingScheduled.has(aid)) {
+      a.muted = (aid !== current);
+    } else {
+      a.muted = false;
+    }
+  });
+}
+
+function eliminar(btn) {
+  const caja = btn.closest('.caja-audio');
+  if (!caja) return;
+  
+  if (!confirm('¿Eliminar este audio programado?')) return;
+  
+  const id = parseInt(caja.getAttribute('data-audio-id'));
+  
+  // Limpiar intervalo
+  if (intervalos[id]) {
+    clearInterval(intervalos[id]);
+    delete intervalos[id];
+  }
+  
+  // Detener y limpiar audio
+  const audio = document.getElementById(`audio${id}`);
+  if (audio) {
+    audio.pause();
+    if (audio.src && audio.src.startsWith('blob:')) {
+      URL.revokeObjectURL(audio.src);
+    }
+    audio.src = '';
+  }
+  
+  // Actualizar estado de reproducción
+  if (playingScheduled.has(id)) {
+    playingScheduled.delete(id);
+    const idx = floorOrder.indexOf(id);
+    if (idx !== -1) floorOrder.splice(idx, 1);
+    scheduledActiveCount = Math.max(0, scheduledActiveCount - 1);
+    
+    if (scheduledActiveCount === 0 && mainWasPlaying) {
+      playMusic();
+      mainWasPlaying = false;
+    }
+    updateMuting();
+  }
+  
+  // Limpiar datos
+  delete tiemposRestantes[id];
+  delete historiales[id];
+  
+  // Remover elemento del DOM
+  caja.remove();
+  
+  showNotification('🗑️ Audio eliminado');
+}
+
+function togglePanel(id) {
+  const p = document.getElementById(id);
+  if (p) {
+    p.style.display = p.style.display === 'block' ? 'none' : 'block';
+  }
+}
+
+// ========== GENERADOR IA (TTS con ElevenLabs) ==========
+
+const iaOverlay = document.getElementById('iaOverlay');
+const iaStatus = document.getElementById('iaStatus');
+let contadorProductos = 0;
+
+document.getElementById('abrirIABtn').addEventListener('click', () => {
+  iaOverlay.classList.remove('hidden');
+});
+document.getElementById('cerrarIA').addEventListener('click', () => {
+  iaOverlay.classList.add('hidden');
+});
+iaOverlay.addEventListener('click', (e) => {
+  if (e.target === iaOverlay) iaOverlay.classList.add('hidden');
+});
+
+function setIAStatus(msg, tipo) {
+  iaStatus.textContent = msg;
+  iaStatus.className = tipo || '';
+}
+
+// ---- Productos ----
+function agregarFilaProducto(nombre = '', precio = '') {
+  contadorProductos++;
+  const id = contadorProductos;
+  const fila = document.createElement('div');
+  fila.className = 'fila-producto';
+  fila.setAttribute('data-fila-id', id);
+  fila.innerHTML = `
+    <input type="text" class="fp-nombre" placeholder="Producto (ej: Arroz Diana 500g)" value="${nombre}">
+    <input type="text" class="fp-precio" placeholder="Precio (ej: $4.900)" value="${precio}">
+    <button type="button">✕</button>
+  `;
+  fila.querySelector('button').addEventListener('click', () => fila.remove());
+  document.getElementById('listaProductos').appendChild(fila);
+}
+
+document.getElementById('agregarProducto').addEventListener('click', () => agregarFilaProducto());
+// Arrancar con una fila lista para usar
+agregarFilaProducto();
+
+// ---- Cargar voces desde ElevenLabs ----
+document.getElementById('cargarVoces').addEventListener('click', async () => {
+  setIAStatus('Cargando voces...', '');
+  try {
+    const res = await fetch('/.netlify/functions/voices');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const select = document.getElementById('vozSelect');
+    select.innerHTML = '';
+    if (!data.voices || data.voices.length === 0) {
+      select.innerHTML = '<option value="">No se encontraron voces</option>';
+      setIAStatus('No se encontraron voces en tu cuenta.', 'error');
+      return;
+    }
+    data.voices.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.voice_id;
+      opt.textContent = v.name + (v.labels && v.labels.accent ? ` (${v.labels.accent})` : '');
+      select.appendChild(opt);
+    });
+    setIAStatus(`✅ ${data.voices.length} voces cargadas.`, 'ok');
+  } catch (err) {
+    console.error(err);
+    setIAStatus('❌ No se pudo conectar con el servidor de voces. Intenta de nuevo.', 'error');
+  }
+});
+
+// ---- Generar guion (plantillas, sin IA de texto, 100% gratis) ----
+const APERTURAS = [
+  'Atención clientes Mercamio,',
+  '¡Grandes ofertas te esperan en Mercamio!',
+  'Mercamio tiene para ti promociones imperdibles,',
+  '¡Llegaron las mejores ofertas a Mercamio!'
+];
+const CIERRES = [
+  (f) => `Promoción válida hasta el ${f}. ¡No te lo pierdas!`,
+  (f) => `Aprovecha esta oferta disponible hasta el ${f}.`,
+  (f) => `Oferta por tiempo limitado, solo hasta el ${f}.`,
+  (f) => `Ven y aprovecha, promoción vigente hasta el ${f}.`
+];
+
+function formatearFecha(iso) {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-');
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  return `${parseInt(d)} de ${meses[parseInt(m) - 1]}`;
+}
+
+document.getElementById('generarTextoBtn').addEventListener('click', () => {
+  const filas = document.querySelectorAll('.fila-producto');
+  const productos = Array.from(filas).map(f => ({
+    nombre: f.querySelector('.fp-nombre').value.trim(),
+    precio: f.querySelector('.fp-precio').value.trim()
+  })).filter(p => p.nombre && p.precio);
+
+  if (productos.length === 0) {
+    setIAStatus('⚠️ Agrega al menos un producto con su precio.', 'error');
+    return;
+  }
+
+  const fechaISO = document.getElementById('fechaVigencia').value;
+  const fechaTexto = formatearFecha(fechaISO);
+
+  const apertura = APERTURAS[Math.floor(Math.random() * APERTURAS.length)];
+  const items = productos.map(p => `${p.nombre} a solo ${p.precio}`);
+  let cuerpo;
+  if (items.length === 1) {
+    cuerpo = items[0];
+  } else {
+    cuerpo = items.slice(0, -1).join(', ') + ' y ' + items[items.length - 1];
+  }
+  const cierre = fechaTexto
+    ? CIERRES[Math.floor(Math.random() * CIERRES.length)](fechaTexto)
+    : '¡Aprovecha esta oferta ya!';
+
+  const guion = `${apertura} ${cuerpo}. ${cierre}`;
+  document.getElementById('guionAnuncio').value = guion;
+  setIAStatus('✅ Guion generado. Puedes editarlo antes de crear el audio.', 'ok');
+});
+
+// ---- Generar audio con ElevenLabs y descargarlo ----
+document.getElementById('generarAudioBtn').addEventListener('click', async () => {
+  const voiceId = document.getElementById('vozSelect').value;
+  const texto = document.getElementById('guionAnuncio').value.trim();
+
+  if (!voiceId) { setIAStatus('⚠️ Selecciona una voz (carga voces primero).', 'error'); return; }
+  if (!texto) { setIAStatus('⚠️ Genera o escribe el guion primero.', 'error'); return; }
+
+  setIAStatus('🎙️ Generando audio, un momento...', '');
+  const btn = document.getElementById('generarAudioBtn');
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/.netlify/functions/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: texto, voice_id: voiceId })
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`HTTP ${res.status}: ${errText}`);
+    }
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const nombreArchivo = `anuncio_mercamio_${Date.now()}.mp3`;
+    a.href = url;
+    a.download = nombreArchivo;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+
+    setIAStatus(`✅ Audio descargado como "${nombreArchivo}". Súbelo en una tarjeta de Audio Programado.`, 'ok');
+  } catch (err) {
+    console.error(err);
+    setIAStatus('❌ Error al generar el audio. Puede que se hayan agotado los créditos del mes.', 'error');
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+// ========== INICIALIZACIÓN ==========
+
+// Crear 3 cajas iniciales
+for (let i = 0; i < 3; i++) {
+  crearAudio();
+}
+
+// Actualizar contador inicial
+updatePlaylistCount();
+
+// Optimización: Liberar memoria al cerrar
+window.addEventListener('beforeunload', () => {
+  // Limpiar todos los intervalos
+  Object.values(intervalos).forEach(clearInterval);
+  
+  // Revocar todas las URLs blob
+  document.querySelectorAll('audio').forEach(audio => {
+    if (audio.src && audio.src.startsWith('blob:')) {
+      URL.revokeObjectURL(audio.src);
+    }
+  });
+});
+
+console.log('✅ Sistema de Audio Mercamio PRO cargado correctamente');
+</script>
+</body>
+</html>
