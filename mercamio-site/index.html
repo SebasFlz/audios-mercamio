@@ -286,9 +286,10 @@
       padding: 10px 12px; background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,159,10,0.2); border-radius: 8px; color: #fff; font-size: 13px;
     }
-    .fila-producto .fp-nombre { flex: 2; }
+    .fila-producto .fp-nombre { flex: 1.8; }
     .fila-producto .fp-presentacion { flex: 1.3; }
-    .fila-producto .fp-precio { flex: 1; }
+    .fila-producto .fp-precio { flex: 0.9; }
+    .fila-producto .fp-tipo { flex: 1; padding: 10px 6px; font-size: 12px; }
     .fila-producto button {
       background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.3);
       color: #ef4444; border-radius: 8px; padding: 0 12px; cursor: pointer;
@@ -1005,7 +1006,7 @@ function setIAStatus(msg, tipo) {
 }
 
 // ---- Productos ----
-function agregarFilaProducto(nombre = '', presentacion = '', precio = '') {
+function agregarFilaProducto(nombre = '', presentacion = '', precio = '', tipo = 'empacado') {
   contadorProductos++;
   const id = contadorProductos;
   const fila = document.createElement('div');
@@ -1014,7 +1015,11 @@ function agregarFilaProducto(nombre = '', presentacion = '', precio = '') {
   fila.innerHTML = `
     <input type="text" class="fp-nombre" placeholder="Producto (ej: Arroz Diana)" value="${nombre}">
     <input type="text" class="fp-presentacion" placeholder="Presentación (ej: 500 gramos)" value="${presentacion}">
-    <input type="text" class="fp-precio" placeholder="Precio (ej: 7.000)" value="${precio}">
+    <input type="text" class="fp-precio" placeholder="Precio (ej: 7000)" value="${precio}">
+    <select class="fp-tipo">
+      <option value="empacado" ${tipo === 'empacado' ? 'selected' : ''}>Empacado</option>
+      <option value="granel" ${tipo === 'granel' ? 'selected' : ''}>A granel</option>
+    </select>
     <button type="button">✕</button>
   `;
   fila.querySelector('button').addEventListener('click', () => fila.remove());
@@ -1054,12 +1059,12 @@ document.getElementById('cargarVoces').addEventListener('click', async () => {
 
 // ---- Generar guion (plantillas variadas, sin IA de texto, 100% gratis) ----
 const APERTURAS = [
-  (s, f) => `Atención clientes, en Mercamio${s} ${f} tenemos promociones imperdibles para ti.`,
-  (s, f) => `¡Grandes ofertas te esperan en Mercamio${s}, ${f}!`,
-  (s, f) => `Mercamio${s} tiene para ti, ${f}, las mejores promociones de la semana.`,
-  (s, f) => `Esta semana en Mercamio${s}, ${f}, aprovecha ofertas increíbles.`,
-  (s, f) => `¡Llegaron las mejores ofertas a Mercamio${s}! Válidas ${f}.`,
-  (s, f) => `Mercamio${s} te invita a aprovechar grandes promociones, ${f}.`
+  (s, f) => `Atención clientes, en Mercamío${s} ${f} tenemos promociones imperdibles para ti.`,
+  (s, f) => `¡Grandes ofertas te esperan en Mercamío${s}, ${f}!`,
+  (s, f) => `Mercamío${s} tiene para ti, ${f}, las mejores promociones de la semana.`,
+  (s, f) => `Esta semana en Mercamío${s}, ${f}, aprovecha ofertas increíbles.`,
+  (s, f) => `¡Llegaron las mejores ofertas a Mercamío${s}! Válidas ${f}.`,
+  (s, f) => `Mercamío${s} te invita a aprovechar grandes promociones, ${f}.`
 ];
 
 const CONECTORES = [
@@ -1071,11 +1076,18 @@ const CONECTORES = [
   'Igualmente encuentras'
 ];
 
-const FRASES_PRODUCTO = [
-  (n, p, pr) => `${n}${p ? ` por ${p}` : ''} a tan solo $${pr} pesos`,
-  (n, p, pr) => `${n} a solo $${pr} pesos${p ? ` cada ${p}` : ''}`,
-  (n, p, pr) => `${n}${p ? `, presentación de ${p},` : ''} a un precio de $${pr} pesos`,
-  (n, p, pr) => `${n} a $${pr} pesos${p ? ` por ${p}` : ''}`
+// Productos empacados (traen un peso fijo de fábrica): se cobran "por X a Y la unidad"
+const FRASES_EMPACADO = [
+  (n, p, pr) => `${n}${p ? ` por ${p}` : ''} a ${pr} pesos la unidad`,
+  (n, p, pr) => `${n}${p ? `, presentación de ${p},` : ''} a ${pr} pesos la unidad`,
+  (n, p, pr) => `${n}${p ? ` por ${p}` : ''} a solo ${pr} pesos cada unidad`
+];
+
+// Productos a granel (carnes, fruver): se cobran "a Y cada X"
+const FRASES_GRANEL = [
+  (n, p, pr) => `${n} a ${pr} pesos${p ? ` cada ${p}` : ''}`,
+  (n, p, pr) => `${n} a solo ${pr} pesos${p ? ` por cada ${p}` : ''}`,
+  (n, p, pr) => `${n}, a ${pr} pesos${p ? ` ${p}` : ''}`
 ];
 
 const CIERRES = [
@@ -1083,7 +1095,7 @@ const CIERRES = [
   (f) => `No dejes pasar esta oportunidad, válida ${f}.`,
   (f) => `Estas ofertas solo estarán disponibles ${f}. ¡No te las pierdas!`,
   (f) => `Aprovecha ya, oferta por tiempo limitado, ${f}.`,
-  (f) => `Te esperamos en Mercamio. Promoción ${f}.`
+  (f) => `Te esperamos en Mercamío. Promoción ${f}.`
 ];
 
 function elegir(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
@@ -1095,6 +1107,67 @@ function barajar(arr) {
     [copia[i], copia[j]] = [copia[j], copia[i]];
   }
   return copia;
+}
+
+// ---- Convertir números a palabras en español (para que el precio siempre se lea bien) ----
+function numeroATexto(num) {
+  num = Math.round(Number(num) || 0);
+  if (num === 0) return 'cero';
+
+  const UNIDADES = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
+  const DIEZ_A_DIECINUEVE = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve'];
+  const DECENAS = ['', '', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+  const CENTENAS = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
+
+  function menorQueMil(n) {
+    if (n === 100) return 'cien';
+    let texto = '';
+    const c = Math.floor(n / 100);
+    const resto = n % 100;
+    if (c > 0) texto += CENTENAS[c];
+    if (resto > 0) {
+      if (texto) texto += ' ';
+      if (resto < 10) {
+        texto += UNIDADES[resto];
+      } else if (resto < 20) {
+        texto += DIEZ_A_DIECINUEVE[resto - 10];
+      } else {
+        const d = Math.floor(resto / 10);
+        const u = resto % 10;
+        if (d === 2 && u > 0) {
+          texto += 'veinti' + UNIDADES[u];
+        } else {
+          texto += DECENAS[d];
+          if (u > 0) texto += ' y ' + UNIDADES[u];
+        }
+      }
+    }
+    return texto.trim();
+  }
+
+  function menorQueUnMillon(n) {
+    const miles = Math.floor(n / 1000);
+    const resto = n % 1000;
+    let texto = '';
+    if (miles > 0) texto += (miles === 1 ? 'mil' : menorQueMil(miles) + ' mil');
+    if (resto > 0) {
+      if (texto) texto += ' ';
+      texto += menorQueMil(resto);
+    }
+    return texto.trim();
+  }
+
+  let texto;
+  if (num < 1000000) {
+    texto = menorQueUnMillon(num);
+  } else {
+    const millones = Math.floor(num / 1000000);
+    const restoMillones = num % 1000000;
+    texto = millones === 1 ? 'un millón' : menorQueUnMillon(millones) + ' millones';
+    if (restoMillones > 0) texto += ' ' + menorQueUnMillon(restoMillones);
+  }
+
+  return texto.replace(/\buno$/, 'un');
 }
 
 const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
@@ -1127,8 +1200,9 @@ document.getElementById('generarTextoBtn').addEventListener('click', () => {
   let productos = Array.from(filas).map(f => ({
     nombre: f.querySelector('.fp-nombre').value.trim(),
     presentacion: f.querySelector('.fp-presentacion').value.trim(),
-    precio: f.querySelector('.fp-precio').value.trim().replace(/[$.]/g, '')
-  })).filter(p => p.nombre && p.precio);
+    precio: parseInt(f.querySelector('.fp-precio').value.replace(/[^\d]/g, ''), 10),
+    tipo: f.querySelector('.fp-tipo').value
+  })).filter(p => p.nombre && p.precio > 0);
 
   if (productos.length === 0) {
     setIAStatus('⚠️ Agrega al menos un producto con su precio.', 'error');
@@ -1146,7 +1220,9 @@ document.getElementById('generarTextoBtn').addEventListener('click', () => {
   const apertura = elegir(APERTURAS)(sedeTexto, rango.enFrase);
 
   const frasesProductos = productos.map((p, idx) => {
-    const frase = elegir(FRASES_PRODUCTO)(p.nombre, p.presentacion, p.precio);
+    const set = p.tipo === 'granel' ? FRASES_GRANEL : FRASES_EMPACADO;
+    const precioTexto = numeroATexto(p.precio) + ' pesos';
+    const frase = elegir(set)(p.nombre, p.presentacion, precioTexto);
     if (idx === 0) return frase.charAt(0).toUpperCase() + frase.slice(1);
     return `${elegir(CONECTORES)} ${frase.charAt(0).toLowerCase() + frase.slice(1)}`;
   });

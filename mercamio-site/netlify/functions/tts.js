@@ -33,6 +33,8 @@ exports.handler = async function (event) {
       body: JSON.stringify({
         text,
         model_id: 'eleven_multilingual_v2',
+        language_code: 'es',
+        apply_text_normalization: 'on',
         voice_settings: {
           stability: 0.65,
           similarity_boost: 0.8,
