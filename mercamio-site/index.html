@@ -287,6 +287,7 @@
       border: 1px solid rgba(255,159,10,0.2); border-radius: 8px; color: #fff; font-size: 13px;
     }
     .fila-producto .fp-nombre { flex: 2; }
+    .fila-producto .fp-presentacion { flex: 1.3; }
     .fila-producto .fp-precio { flex: 1; }
     .fila-producto button {
       background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.3);
@@ -362,14 +363,23 @@
       </div>
 
       <div class="ia-section">
-        <label>📦 Productos y precios</label>
+        <label>🏬 Sede (opcional)</label>
+        <input type="text" id="sedeInput" placeholder="Ej: Centro Sur">
+      </div>
+
+      <div class="ia-section">
+        <label>📦 Productos</label>
         <div id="listaProductos"></div>
         <button class="boton" id="agregarProducto">➕ Agregar producto</button>
       </div>
 
       <div class="ia-section">
-        <label>📅 Promoción válida hasta</label>
-        <input type="date" id="fechaVigencia">
+        <label>📅 Vigencia de la promoción</label>
+        <div style="display:flex; gap:8px;">
+          <input type="date" id="fechaInicio" style="flex:1;">
+          <input type="date" id="fechaVigencia" style="flex:1;">
+        </div>
+        <p class="ia-hint">Fecha inicio (opcional) y fecha fin. Si dejas la de inicio vacía, se dirá solo "hasta el...".</p>
       </div>
 
       <button class="boton boton-primary" id="generarTextoBtn">✍️ Generar guion del anuncio</button>
@@ -995,15 +1005,16 @@ function setIAStatus(msg, tipo) {
 }
 
 // ---- Productos ----
-function agregarFilaProducto(nombre = '', precio = '') {
+function agregarFilaProducto(nombre = '', presentacion = '', precio = '') {
   contadorProductos++;
   const id = contadorProductos;
   const fila = document.createElement('div');
   fila.className = 'fila-producto';
   fila.setAttribute('data-fila-id', id);
   fila.innerHTML = `
-    <input type="text" class="fp-nombre" placeholder="Producto (ej: Arroz Diana 500g)" value="${nombre}">
-    <input type="text" class="fp-precio" placeholder="Precio (ej: $4.900)" value="${precio}">
+    <input type="text" class="fp-nombre" placeholder="Producto (ej: Arroz Diana)" value="${nombre}">
+    <input type="text" class="fp-presentacion" placeholder="Presentación (ej: 500 gramos)" value="${presentacion}">
+    <input type="text" class="fp-precio" placeholder="Precio (ej: 7.000)" value="${precio}">
     <button type="button">✕</button>
   `;
   fila.querySelector('button').addEventListener('click', () => fila.remove());
@@ -1041,32 +1052,82 @@ document.getElementById('cargarVoces').addEventListener('click', async () => {
   }
 });
 
-// ---- Generar guion (plantillas, sin IA de texto, 100% gratis) ----
+// ---- Generar guion (plantillas variadas, sin IA de texto, 100% gratis) ----
 const APERTURAS = [
-  'Atención clientes Mercamio,',
-  '¡Grandes ofertas te esperan en Mercamio!',
-  'Mercamio tiene para ti promociones imperdibles,',
-  '¡Llegaron las mejores ofertas a Mercamio!'
-];
-const CIERRES = [
-  (f) => `Promoción válida hasta el ${f}. ¡No te lo pierdas!`,
-  (f) => `Aprovecha esta oferta disponible hasta el ${f}.`,
-  (f) => `Oferta por tiempo limitado, solo hasta el ${f}.`,
-  (f) => `Ven y aprovecha, promoción vigente hasta el ${f}.`
+  (s, f) => `Atención clientes, en Mercamio${s} ${f} tenemos promociones imperdibles para ti.`,
+  (s, f) => `¡Grandes ofertas te esperan en Mercamio${s}, ${f}!`,
+  (s, f) => `Mercamio${s} tiene para ti, ${f}, las mejores promociones de la semana.`,
+  (s, f) => `Esta semana en Mercamio${s}, ${f}, aprovecha ofertas increíbles.`,
+  (s, f) => `¡Llegaron las mejores ofertas a Mercamio${s}! Válidas ${f}.`,
+  (s, f) => `Mercamio${s} te invita a aprovechar grandes promociones, ${f}.`
 ];
 
-function formatearFecha(iso) {
-  if (!iso) return '';
+const CONECTORES = [
+  'También tenemos',
+  'No olvides llevar',
+  'Y no puede faltar',
+  'Además, aprovecha',
+  'Sin dejar atrás',
+  'Igualmente encuentras'
+];
+
+const FRASES_PRODUCTO = [
+  (n, p, pr) => `${n}${p ? ` por ${p}` : ''} a tan solo $${pr} pesos`,
+  (n, p, pr) => `${n} a solo $${pr} pesos${p ? ` cada ${p}` : ''}`,
+  (n, p, pr) => `${n}${p ? `, presentación de ${p},` : ''} a un precio de $${pr} pesos`,
+  (n, p, pr) => `${n} a $${pr} pesos${p ? ` por ${p}` : ''}`
+];
+
+const CIERRES = [
+  (f) => `Ven y aprovecha, promoción vigente ${f}.`,
+  (f) => `No dejes pasar esta oportunidad, válida ${f}.`,
+  (f) => `Estas ofertas solo estarán disponibles ${f}. ¡No te las pierdas!`,
+  (f) => `Aprovecha ya, oferta por tiempo limitado, ${f}.`,
+  (f) => `Te esperamos en Mercamio. Promoción ${f}.`
+];
+
+function elegir(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function barajar(arr) {
+  const copia = [...arr];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+function partesFecha(iso) {
   const [y, m, d] = iso.split('-');
-  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  return `${parseInt(d)} de ${meses[parseInt(m) - 1]}`;
+  return { dia: parseInt(d), mes: MESES[parseInt(m) - 1], anio: y };
+}
+
+function formatearRangoFecha(inicioISO, finISO) {
+  if (!finISO && !inicioISO) return { conectada: 'por tiempo limitado', enFrase: 'por tiempo limitado' };
+  if (finISO && !inicioISO) {
+    const f = partesFecha(finISO);
+    const texto = `hasta el ${f.dia} de ${f.mes}`;
+    return { conectada: texto, enFrase: texto };
+  }
+  if (finISO && inicioISO) {
+    const i = partesFecha(inicioISO);
+    const f = partesFecha(finISO);
+    const texto = i.mes === f.mes
+      ? `del ${i.dia} al ${f.dia} de ${f.mes}`
+      : `del ${i.dia} de ${i.mes} al ${f.dia} de ${f.mes}`;
+    return { conectada: texto, enFrase: texto };
+  }
+  return { conectada: 'por tiempo limitado', enFrase: 'por tiempo limitado' };
 }
 
 document.getElementById('generarTextoBtn').addEventListener('click', () => {
   const filas = document.querySelectorAll('.fila-producto');
-  const productos = Array.from(filas).map(f => ({
+  let productos = Array.from(filas).map(f => ({
     nombre: f.querySelector('.fp-nombre').value.trim(),
-    precio: f.querySelector('.fp-precio').value.trim()
+    presentacion: f.querySelector('.fp-presentacion').value.trim(),
+    precio: f.querySelector('.fp-precio').value.trim().replace(/[$.]/g, '')
   })).filter(p => p.nombre && p.precio);
 
   if (productos.length === 0) {
@@ -1074,22 +1135,25 @@ document.getElementById('generarTextoBtn').addEventListener('click', () => {
     return;
   }
 
-  const fechaISO = document.getElementById('fechaVigencia').value;
-  const fechaTexto = formatearFecha(fechaISO);
+  productos = barajar(productos);
 
-  const apertura = APERTURAS[Math.floor(Math.random() * APERTURAS.length)];
-  const items = productos.map(p => `${p.nombre} a solo ${p.precio}`);
-  let cuerpo;
-  if (items.length === 1) {
-    cuerpo = items[0];
-  } else {
-    cuerpo = items.slice(0, -1).join(', ') + ' y ' + items[items.length - 1];
-  }
-  const cierre = fechaTexto
-    ? CIERRES[Math.floor(Math.random() * CIERRES.length)](fechaTexto)
-    : '¡Aprovecha esta oferta ya!';
+  const sede = document.getElementById('sedeInput').value.trim();
+  const sedeTexto = sede ? ` ${sede}` : '';
+  const fechaInicioISO = document.getElementById('fechaInicio').value;
+  const fechaFinISO = document.getElementById('fechaVigencia').value;
+  const rango = formatearRangoFecha(fechaInicioISO, fechaFinISO);
 
-  const guion = `${apertura} ${cuerpo}. ${cierre}`;
+  const apertura = elegir(APERTURAS)(sedeTexto, rango.enFrase);
+
+  const frasesProductos = productos.map((p, idx) => {
+    const frase = elegir(FRASES_PRODUCTO)(p.nombre, p.presentacion, p.precio);
+    if (idx === 0) return frase.charAt(0).toUpperCase() + frase.slice(1);
+    return `${elegir(CONECTORES)} ${frase.charAt(0).toLowerCase() + frase.slice(1)}`;
+  });
+
+  const cierre = elegir(CIERRES)(rango.enFrase);
+
+  const guion = `${apertura} ... ${frasesProductos.join('. ')}. ... ${cierre}`;
   document.getElementById('guionAnuncio').value = guion;
   setIAStatus('✅ Guion generado. Puedes editarlo antes de crear el audio.', 'ok');
 });
