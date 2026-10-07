@@ -3,1305 +3,1999 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AUDIOS PROGRAMADOS MERCAMIO PRO</title>
-   <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDu9AivkPbJWswSGkmLj-OKptPqwE3c_j_qA&s" type="image/png">
+  <meta name="theme-color" content="#17241F">
+  <title>Audios Mercamio</title>
+  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDu9AivkPbJWswSGkmLj-OKptPqwE3c_j_qA&s" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --papel: #EEF1EE;
+      --panel: #FFFFFF;
+      --tinta: #17241F;
+      --tinta-2: #4A5953;
+      --tinta-3: #7C8A84;
+      --linea: #D5DCD7;
+      --linea-suave: #E5EAE6;
+      --verde: #1E6B57;
+      --verde-hover: #17584A;
+      --verde-claro: #E2EFEA;
+      --aire: #D93A26;
+      --aire-claro: #FBE7E3;
+      --ambar: #B7791F;
+      --ambar-claro: #FBF0DD;
+      --radio-s: 6px;
+      --radio-m: 10px;
+      --fuente: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      color-scheme: light;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
     body {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      min-height: 100vh; font-family: 'Segoe UI', system-ui, sans-serif; 
-      color: #ffffff; padding: 0; overflow-x: hidden;
+      background: var(--papel); color: var(--tinta); font-family: var(--fuente);
+      font-size: 15px; line-height: 1.45; min-height: 100vh; overflow-x: hidden;
+      font-variant-numeric: tabular-nums;
     }
-    body::before {
-      content: ""; position: fixed; inset: 0;
-      background-image: radial-gradient(circle at 20% 50%, rgba(255, 159, 10, 0.05) 0%, transparent 50%);
-      z-index: 0; pointer-events: none;
-    }
-    .top-bar {
-      background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(20px);
-      border-bottom: 2px solid rgba(255, 159, 10, 0.3); padding: 15px 40px;
-      display: flex; align-items: center; justify-content: space-between;
-      position: sticky; top: 0; z-index: 200; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    }
-    .logo-section { display: flex; align-items: center; gap: 20px; }
-    .logo-img {
-      height: 50px; width: auto; border-radius: 25px;
-      box-shadow: 0 4px 15px rgba(255, 159, 10, 0.3); object-fit: contain;
-    }
-    .brand-text h1 {
-      font-size: 1.8em; font-weight: 800;
-      background: linear-gradient(135deg, #ff9f0a 0%, #fbbf24 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: 0.5px; margin: 0;
-    }
-    .brand-text p { font-size: 0.85em; color: #94a3b8; margin: 0; font-weight: 500; }
-    .top-actions { display: flex; gap: 12px; }
-    .container { position: relative; z-index: 1; max-width: 1600px; margin: 0 auto; padding: 30px 20px 120px 20px; }
-    .section-header { text-align: center; margin-bottom: 40px; }
-    .section-title { font-size: 2em; font-weight: 700; margin-bottom: 10px; }
-    .section-subtitle { color: #94a3b8; font-size: 1.05em; }
-    .contenedor {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 25px; margin-bottom: 100px;
-    }
-    .caja-audio {
-      background: linear-gradient(145deg, rgba(26, 26, 46, 0.8), rgba(15, 52, 96, 0.6));
-      backdrop-filter: blur(20px); border-radius: 20px; padding: 28px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 159, 10, 0.2);
-      transition: all 0.4s; position: relative; overflow: hidden;
-    }
-    .caja-audio::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, #ff9f0a, #fbbf24, #ff9f0a); opacity: 0; transition: opacity 0.3s;
-    }
-    .caja-audio:hover {
-      transform: translateY(-8px); box-shadow: 0 15px 50px rgba(255, 159, 10, 0.2);
-      border-color: rgba(255, 159, 10, 0.4);
-    }
-    .caja-audio:hover::before { opacity: 1; }
-    .audio-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .nombre-audio {
-      font-size: 1.3em; font-weight: 700; white-space: nowrap;
-      overflow: hidden; text-overflow: ellipsis; flex: 1;
-    }
-    .status-badge {
-      display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
-      border-radius: 20px; font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
-    }
-    .status-programado { background: linear-gradient(135deg, #f59e0b, #d97706); }
-    .status-activo {
-      background: linear-gradient(135deg, #10b981, #059669);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--verde); outline-offset: 2px; }
+    .hidden { display: none !important; }
+
+    /* ===== Botones ===== */
     .boton {
-      width: 100%; background: linear-gradient(135deg, rgba(255, 159, 10, 0.2), rgba(251, 191, 36, 0.2));
-      color: #ffffff; border: 1px solid rgba(255, 159, 10, 0.3); border-radius: 12px;
-      padding: 14px 20px; font-size: 14px; font-weight: 600; margin: 10px 0;
-      cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px;
-      position: relative; overflow: hidden;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 16px; min-height: 42px; border-radius: var(--radio-s);
+      border: 1px solid var(--linea); background: var(--panel); color: var(--tinta);
+      font-weight: 600; font-size: 14px; white-space: nowrap;
+      transition: background-color .15s, border-color .15s;
     }
-    .boton:hover {
-      background: linear-gradient(135deg, rgba(255, 159, 10, 0.3), rgba(251, 191, 36, 0.3));
-      border-color: #ff9f0a; transform: translateY(-2px); box-shadow: 0 5px 20px rgba(255, 159, 10, 0.3);
+    .boton:hover { border-color: var(--tinta-3); }
+    .boton-primary { background: var(--verde); border-color: var(--verde); color: #fff; }
+    .boton-primary:hover { background: var(--verde-hover); border-color: var(--verde-hover); }
+    .boton-danger { color: var(--aire); }
+    .boton-danger:hover { border-color: var(--aire); background: var(--aire-claro); }
+    .boton:disabled { opacity: .5; cursor: not-allowed; }
+    .boton-mini { min-height: 34px; padding: 6px 12px; font-size: 13px; }
+    .boton svg { width: 16px; height: 16px; flex: none; }
+    .tag-pronto {
+      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px;
+      background: var(--linea-suave); color: var(--tinta-2);
     }
-    .boton-primary {
-      background: linear-gradient(135deg, #ff9f0a, #fbbf24);
-      border: none; color: #1a1a2e; font-weight: 700;
+    .boton-proximamente { color: var(--tinta-2); }
+
+    /* ===== Encabezado ===== */
+    .top-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 28px; background: var(--tinta); color: #fff;
     }
-    .boton-primary:hover {
-      background: linear-gradient(135deg, #fbbf24, #ff9f0a);
-      box-shadow: 0 8px 25px rgba(255, 159, 10, 0.4);
+    .marca { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .logo-img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; background: #fff; }
+    .marca-texto strong {
+      display: block; font-size: 20px; font-weight: 800; letter-spacing: -.01em;
+      font-variation-settings: 'wdth' 112;
     }
-    .boton-danger {
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
-      border-color: rgba(239, 68, 68, 0.3);
+    .marca-texto span { display: block; font-size: 12px; color: #A9B8B1; }
+    .sesion-info { display: flex; align-items: center; gap: 10px; }
+    .sesion-chip {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;
+      padding: 6px 12px; border-radius: 20px; background: rgba(255,255,255,.08); white-space: nowrap;
     }
+    .sesion-chip::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #6FC3A6; }
+    .sesion-chip.admin::before { background: #F2C14E; }
+    .top-bar .boton { background: transparent; border-color: rgba(255,255,255,.22); color: #fff; }
+    .top-bar .boton:hover { border-color: #fff; }
+
+    /* ===== Consola (la pieza protagonista) ===== */
+    .consola {
+      display: grid; grid-template-columns: auto repeat(3, minmax(0, 1fr));
+      background: var(--tinta); color: #fff; border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .c-reloj { padding: 14px 28px 18px; border-right: 1px solid rgba(255,255,255,.1); }
+    #estadoReloj {
+      display: block; font-size: clamp(40px, 5vw, 64px); line-height: 1; font-weight: 700;
+      font-variation-settings: 'wdth' 125; letter-spacing: -.02em;
+    }
+    #fechaHoy { display: block; font-size: 13px; color: #A9B8B1; margin-top: 6px; }
+    .c-celda {
+      padding: 16px 22px; border-right: 1px solid rgba(255,255,255,.1); min-width: 0;
+      display: flex; flex-direction: column; justify-content: center; gap: 4px;
+    }
+    .c-celda:last-child { border-right: 0; }
+    .c-celda small { font-size: 12px; color: #A9B8B1; display: flex; align-items: center; gap: 8px; }
+    .c-celda strong {
+      font-size: 17px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .lampara {
+      width: 10px; height: 10px; border-radius: 50%; background: #3A4A44; flex: none;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+    }
+    .c-celda.on .lampara { background: var(--aire); box-shadow: 0 0 0 4px rgba(217,58,38,.25); }
+    .c-celda.on { background: #2A1C18; }
+    .c-celda.on small { color: #F4A496; }
+    .c-celda.warn .lampara { background: var(--ambar); }
+    .c-celda.musica-on .lampara { background: #6FC3A6; }
+
+    /* ===== Distribución ===== */
+    .layout {
+      display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 28px;
+      max-width: 1500px; margin: 0 auto; padding: 28px 28px 40px; align-items: start;
+    }
+    .layout.sin-musica { grid-template-columns: minmax(0, 1fr); }
+    .seccion-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .seccion-head h1 { font-size: 26px; font-weight: 750; letter-spacing: -.015em; font-variation-settings: 'wdth' 106; }
+    .seccion-head p { color: var(--tinta-2); font-size: 14px; }
+    .acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* ===== Choques ===== */
+    .choques {
+      border: 1px solid #E8C98F; background: var(--ambar-claro); border-radius: var(--radio-m);
+      padding: 16px 18px; margin-bottom: 20px;
+    }
+    .choques h4 { font-size: 15px; font-weight: 700; color: #7A4F0E; margin-bottom: 4px; }
+    .choques p.ayuda { color: #7A5A26; font-size: 13px; margin-bottom: 10px; max-width: 70ch; }
+    .choque-item {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+      padding: 10px 12px; margin-top: 8px; border-radius: var(--radio-s); background: #fff; font-size: 14px;
+      border: 1px solid #EAD7B0;
+    }
+    .choque-item.pronto { border-color: var(--aire); }
+    .choque-item .boton { min-height: 34px; padding: 6px 12px; font-size: 13px; white-space: normal; text-align: left; }
+
+    /* ===== Tarjetas de audio ===== */
+    .contenedor { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .caja-audio {
+      background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio-m);
+      padding: 18px; display: flex; flex-direction: column; gap: 14px; min-width: 0;
+      border-left: 4px solid var(--linea);
+    }
+    .caja-audio.activa { border-left-color: var(--verde); }
+    .caja-audio.en-cola { border-left-color: var(--ambar); }
+    .caja-audio.sonando { border-left-color: var(--aire); box-shadow: 0 0 0 1px var(--aire); }
+    .card-top { display: flex; align-items: center; gap: 10px; }
+    .nombre-input {
+      flex: 1; min-width: 0; border: 0; border-bottom: 1px dashed transparent; background: transparent;
+      font-size: 17px; font-weight: 700; padding: 2px 0;
+    }
+    .nombre-input:hover { border-bottom-color: var(--linea); }
+    .nombre-input:focus { outline: none; border-bottom-color: var(--verde); }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px; white-space: nowrap; background: var(--linea-suave); color: var(--tinta-2);
+    }
+    .status-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .status-activo { background: var(--verde-claro); color: var(--verde); }
+    .status-cola { background: var(--ambar-claro); color: #8A5A12; }
+    .status-sonando { background: var(--aire); color: #fff; }
+
+    .temporizador { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .t-falta {
+      font-size: 34px; font-weight: 700; line-height: 1; font-variation-settings: 'wdth' 118;
+      letter-spacing: -.01em;
+    }
+    .t-info { font-size: 13px; color: var(--tinta-2); }
+    .caja-audio:not(.activa):not(.sonando) .t-falta { color: var(--tinta-3); }
+
+    .caja-audio audio { width: 100%; height: 40px; }
     input[type="file"] {
-      width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.05);
-      border: 2px dashed rgba(255, 159, 10, 0.3); border-radius: 12px;
-      color: #94a3b8; cursor: pointer; margin: 12px 0; font-size: 13px;
+      width: 100%; font-size: 13px; color: var(--tinta-2); padding: 8px; border: 1px dashed var(--linea);
+      border-radius: var(--radio-s); background: var(--papel);
     }
     input[type="file"]::file-selector-button {
-      background: linear-gradient(135deg, #ff9f0a, #fbbf24); border: none;
-      padding: 8px 16px; border-radius: 8px; color: #1a1a2e;
-      cursor: pointer; margin-right: 12px; font-weight: 600; font-size: 12px;
+      font: inherit; font-weight: 600; margin-right: 10px; padding: 6px 12px; border-radius: var(--radio-s);
+      border: 1px solid var(--linea); background: #fff; color: var(--tinta); cursor: pointer;
     }
-    input[type="number"], input[type="time"] {
-      width: 100%; padding: 12px 16px; background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 159, 10, 0.2); border-radius: 10px;
-      color: #ffffff; font-size: 14px; margin: 8px 0;
+    .horario { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .horario .campo-cada { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 10px; }
+    .horario .campo-cada input { max-width: 110px; }
+    .campo { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .campo span { font-size: 12px; font-weight: 600; color: var(--tinta-2); }
+    input[type="time"], input[type="number"], input[type="text"], input[type="password"], input[type="date"], select, textarea {
+      width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid var(--linea); border-radius: var(--radio-s);
+      background: #fff; font-size: 15px;
     }
-    input[type="number"]:focus, input[type="time"]:focus {
-      outline: none; border-color: #ff9f0a; background: rgba(255, 159, 10, 0.1);
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px var(--verde-claro); }
+    .hint { font-size: 12px; color: var(--tinta-3); margin-top: -6px; }
+    .vol { display: flex; align-items: center; gap: 12px; }
+    .vol span { font-size: 12px; font-weight: 600; color: var(--tinta-2); }
+    input[type="range"] { flex: 1; accent-color: var(--verde); }
+    .card-actions { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+    .aviso-choque {
+      display: none; padding: 8px 10px; border-radius: var(--radio-s); font-size: 13px;
+      background: var(--ambar-claro); color: #7A4F0E;
     }
-    input[type="range"] {
-      width: 100%; margin: 15px 0; -webkit-appearance: none; background: transparent;
+    .aviso-choque.visible { display: block; }
+    .btn-toggle-panel {
+      background: none; border: 0; padding: 0; font-size: 13px; font-weight: 600; color: var(--verde); text-align: left;
     }
-    input[type="range"]::-webkit-slider-track {
-      height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 3px;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none; width: 18px; height: 18px;
-      background: linear-gradient(135deg, #ff9f0a, #fbbf24);
-      border-radius: 50%; cursor: pointer; margin-top: -6px;
-    }
-    .schedule-controls {
-      background: rgba(0, 0, 0, 0.3); padding: 18px; border-radius: 12px;
-      margin: 18px 0; border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .schedule-controls label {
-      display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600;
-      color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .temporizador {
-      margin-top: 18px; font-size: 1.6em; font-weight: 700; color: #fbbf24;
-      text-align: center; padding: 15px; background: rgba(251, 191, 36, 0.1);
-      border-radius: 12px; border: 1px solid rgba(251, 191, 36, 0.2);
-    }
-    .acordeon button {
-      background: rgba(255, 255, 255, 0.05); color: #ffffff; cursor: pointer;
-      padding: 12px 16px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px; margin-top: 12px; font-weight: 600; font-size: 13px;
-      text-align: left;
-    }
-    .panel {
-      padding: 14px; display: none; background: rgba(0, 0, 0, 0.3);
-      border-radius: 10px; max-height: 200px; overflow-y: auto; margin-top: 8px;
-    }
-    .panel p {
-      padding: 8px; margin: 4px 0; background: rgba(255, 255, 255, 0.03);
-      border-radius: 6px; font-size: 13px; color: #94a3b8;
-    }
-    #playerContainer {
-      position: fixed; top: 0; right: 0; width: 360px; height: 100vh;
-      background: linear-gradient(180deg, rgba(15, 15, 25, 0.98), rgba(10, 10, 20, 0.98));
-      backdrop-filter: blur(20px); border-left: 2px solid rgba(255, 159, 10, 0.3);
-      padding: 30px 25px; overflow-y: auto; box-shadow: -10px 0 50px rgba(0, 0, 0, 0.5);
-      z-index: 150; transition: right 0.5s;
-    }
-    #playerContainer.hidden { right: -400px; }
-    .player-header {
-      text-align: center; margin-bottom: 25px; padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .player-header h3 {
-      font-size: 1.3em; font-weight: 700;
-      background: linear-gradient(135deg, #ff9f0a, #fbbf24);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .playlist-info {
-      text-align: center; margin: 10px 0; font-size: 0.9em; color: #94a3b8;
-    }
-    #controls { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
-    #controls button {
-      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #ffffff; font-size: 20px; cursor: pointer; border-radius: 50%;
-      width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
-      transition: all 0.3s;
-    }
-    #controls button:hover {
-      background: linear-gradient(135deg, rgba(255, 159, 10, 0.2), rgba(251, 191, 36, 0.2));
-      border-color: #ff9f0a; transform: scale(1.1);
-    }
-    #controls button.active { background: linear-gradient(135deg, #ff9f0a, #fbbf24); color: #1a1a2e; }
-    #playPauseBtn {
-      width: 60px; height: 60px; font-size: 24px;
-      background: linear-gradient(135deg, #ff9f0a, #fbbf24); color: #1a1a2e; border: none;
-    }
-    .track-item {
-      background: rgba(255, 255, 255, 0.04); padding: 12px 14px; border-radius: 10px;
-      margin-bottom: 8px; cursor: pointer; transition: all 0.3s;
-      border: 1px solid transparent; font-size: 13px; color: #94a3b8;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .track-item:hover {
-      background: rgba(255, 159, 10, 0.1); border-color: rgba(255, 159, 10, 0.3);
-      color: #ffffff; transform: translateX(5px);
-    }
-    .track-item.active {
-      background: linear-gradient(135deg, rgba(255, 159, 10, 0.2), rgba(251, 191, 36, 0.2));
-      border-color: #ff9f0a; color: #ffffff; font-weight: 600;
-    }
-    .track-remove {
-      background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #ef4444; padding: 4px 8px; border-radius: 6px; font-size: 11px;
-      cursor: pointer; transition: all 0.2s;
-    }
-    .track-remove:hover {
-      background: rgba(239, 68, 68, 0.4); transform: scale(1.05);
-    }
-    #playlist { max-height: 250px; overflow-y: auto; margin: 20px 0; }
-    .volume-section {
-      margin: 20px 0; padding: 15px; background: rgba(255, 255, 255, 0.03);
-      border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .volume-section label {
-      display: block; font-size: 12px; font-weight: 600; color: #64748b;
-      margin-bottom: 10px; text-transform: uppercase;
-    }
-    footer {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95));
-      backdrop-filter: blur(20px); padding: 20px; text-align: center;
-      border-top: 1px solid rgba(255, 159, 10, 0.2); z-index: 100;
-    }
-    footer p { margin: 0; font-size: 13px; color: #64748b; font-weight: 500; }
-    footer .dev-name {
-      font-weight: 700; background: linear-gradient(135deg, #ff9f0a, #fbbf24);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 14px;
-    }
-    @media (max-width: 768px) {
-      .top-bar { padding: 15px 20px; flex-direction: column; gap: 15px; }
-      #playerContainer { width: 100%; height: auto; position: relative; right: 0; }
-      #playerContainer.hidden { display: none; }
-      .contenedor { grid-template-columns: 1fr; }
-    }
+    .panel { display: none; margin-top: 8px; max-height: 190px; overflow-y: auto; border-top: 1px solid var(--linea-suave); }
+    .panel p { font-size: 13px; color: var(--tinta-2); padding: 6px 0; border-bottom: 1px solid var(--linea-suave); }
 
-    /* ===== GENERADOR IA ===== */
+    /* ===== Música (columna derecha, nunca encima del contenido) ===== */
+    #playerContainer {
+      background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio-m);
+      padding: 20px; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto;
+    }
+    .player-header h3 { font-size: 17px; font-weight: 700; }
+    #cancionActual { font-size: 14px; color: var(--tinta-2); margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .playlist-info { font-size: 13px; color: var(--tinta-3); margin-top: 2px; }
+    #controls { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 14px; }
+    #controls button {
+      width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--linea); background: #fff;
+      display: grid; place-items: center; color: var(--tinta);
+    }
+    #controls button svg { width: 18px; height: 18px; }
+    #controls button:hover { border-color: var(--tinta-3); }
+    #controls button.active { background: var(--verde-claro); border-color: var(--verde); color: var(--verde); }
+    #playPauseBtn { width: 56px !important; height: 56px !important; background: var(--tinta) !important; border-color: var(--tinta) !important; color: #fff !important; }
+    #playPauseBtn svg { width: 22px; height: 22px; }
+    .volume-section { display: flex; align-items: center; gap: 12px; padding: 4px 0 14px; border-bottom: 1px solid var(--linea-suave); }
+    .volume-section label { font-size: 12px; font-weight: 600; color: var(--tinta-2); }
+    #playlist { margin: 12px 0; max-height: 340px; overflow-y: auto; }
+    .playlist-vacia { font-size: 14px; color: var(--tinta-3); padding: 18px 4px; }
+    .track-item {
+      display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: var(--radio-s);
+      font-size: 14px; color: var(--tinta-2); cursor: pointer;
+    }
+    .track-item:hover { background: var(--papel); color: var(--tinta); }
+    .track-item.active { background: var(--verde-claro); color: var(--verde); font-weight: 600; }
+    .track-remove {
+      border: 0; background: none; color: var(--tinta-3); width: 26px; height: 26px; border-radius: 50%; flex: none;
+    }
+    .track-remove:hover { background: var(--aire-claro); color: var(--aire); }
+    .player-acciones { display: grid; gap: 8px; }
+
+    footer {
+      max-width: 1500px; margin: 0 auto; padding: 0 28px 28px; font-size: 12px; color: var(--tinta-3);
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    footer .dev-name { color: var(--tinta-2); font-weight: 600; }
+
+    /* ===== Pantallas completas (login, iniciar, duplicada) ===== */
+    .pantalla-completa {
+      position: fixed; inset: 0; z-index: 500; display: grid; place-items: center; padding: 16px;
+      background: var(--tinta);
+    }
+    .login-card {
+      width: 100%; max-width: 380px; background: var(--panel); border-radius: 14px; padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .login-card .marca-login {
+      font-size: 30px; font-weight: 800; letter-spacing: -.02em; font-variation-settings: 'wdth' 125;
+    }
+    .login-card p.sub { color: var(--tinta-2); font-size: 14px; margin-bottom: 8px; }
+    .login-card .boton { width: 100%; margin-top: 4px; }
+    .login-error { color: var(--aire); font-size: 13px; min-height: 18px; }
+
+    /* ===== Modales ===== */
     .ia-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(6px); z-index: 300;
-      display: flex; align-items: center; justify-content: center; padding: 20px;
+      position: fixed; inset: 0; z-index: 400; background: rgba(23,36,31,.55);
+      display: grid; place-items: center; padding: 16px;
     }
-    .ia-overlay.hidden { display: none; }
     .ia-modal {
-      background: linear-gradient(160deg, rgba(26,26,46,0.98), rgba(15,52,96,0.95));
-      border: 1px solid rgba(255,159,10,0.3); border-radius: 20px;
-      padding: 30px; width: 100%; max-width: 560px; max-height: 88vh;
-      overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      background: var(--panel); border-radius: 14px; padding: 24px; width: 100%; max-width: 560px;
+      max-height: 88vh; overflow-y: auto; box-shadow: 0 24px 60px rgba(23,36,31,.3);
     }
-    .ia-modal-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    .ia-modal-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .ia-modal-header h3 { font-size: 19px; font-weight: 700; }
+    .ia-modal-header button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--linea); background: #fff; }
+    .modal-texto { color: var(--tinta-2); font-size: 15px; margin-bottom: 18px; white-space: pre-line; }
+    .modal-botones { display: flex; flex-direction: column; gap: 8px; }
+    .modal-botones .boton { white-space: normal; }
+    .ia-section { margin: 16px 0; display: flex; flex-direction: column; gap: 6px; }
+    .ia-section label { font-size: 13px; font-weight: 600; color: var(--tinta-2); }
+    .ia-hint { font-size: 12px; color: var(--tinta-3); }
+    .ia-modal > .boton { width: 100%; }
+    .fila-producto { display: flex; gap: 6px; margin-bottom: 6px; }
+    .fila-producto .fp-nombre { flex: 1.8; } .fila-producto .fp-presentacion { flex: 1.3; }
+    .fila-producto .fp-precio { flex: .9; } .fila-producto .fp-tipo { flex: 1; }
+    .fila-producto button { border: 1px solid var(--linea); background: #fff; border-radius: var(--radio-s); padding: 0 10px; color: var(--aire); }
+    #iaStatus { font-size: 14px; margin-top: 12px; min-height: 18px; color: var(--tinta-2); }
+    #iaStatus.error { color: var(--aire); } #iaStatus.ok { color: var(--verde); }
+
+    /* ===== Responsive ===== */
+    .solo-movil { display: none; }
+    @media (max-width: 1100px) {
+      .consola { grid-template-columns: 1fr 1fr; }
+      .c-reloj { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.1); display: flex; align-items: baseline; gap: 14px; }
+      .c-celda:nth-child(3) { border-right: 0; }
+      .c-celda:nth-child(4) { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.1); }
     }
-    .ia-modal-header h3 {
-      background: linear-gradient(135deg, #ff9f0a, #fbbf24);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3em;
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: minmax(0, 1fr); padding: 20px 16px 32px; gap: 20px; }
+      #playerContainer { position: static; max-height: none; }
+      .solo-movil { display: inline-flex; }
     }
-    .ia-modal-header button {
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
-      color: #fff; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 16px;
+    @media (max-width: 600px) {
+      .top-bar { padding: 12px 16px; }
+      .marca-texto span { display: none; }
+      .c-reloj { padding: 12px 16px; }
+      .c-celda { padding: 12px 16px; }
+      .consola { grid-template-columns: 1fr; }
+      .c-celda { border-right: 0; border-top: 1px solid rgba(255,255,255,.1); }
+      .c-celda:nth-child(4) { grid-column: auto; }
+      .seccion-head h1 { font-size: 22px; }
+      .acciones { width: 100%; }
+      .acciones .boton { flex: 1 1 auto; }
+      .contenedor { grid-template-columns: minmax(0, 1fr); }
+      footer { padding: 0 16px 24px; }
+      input, select, textarea { font-size: 16px; }
     }
-    .ia-section { margin-bottom: 20px; }
-    .ia-section label {
-      display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600;
-      color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .ia-hint { font-size: 11px; color: #64748b; margin-top: 4px; }
-    select, textarea {
-      width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,159,10,0.2); border-radius: 10px;
-      color: #fff; font-size: 14px; margin: 6px 0; font-family: inherit;
-    }
-    select:focus, textarea:focus { outline: none; border-color: #ff9f0a; background: rgba(255,159,10,0.1); }
-    .fila-producto {
-      display: flex; gap: 8px; margin-bottom: 8px;
-    }
-    .fila-producto input {
-      padding: 10px 12px; background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,159,10,0.2); border-radius: 8px; color: #fff; font-size: 13px;
-    }
-    .fila-producto .fp-nombre { flex: 1.8; }
-    .fila-producto .fp-presentacion { flex: 1.3; }
-    .fila-producto .fp-precio { flex: 0.9; }
-    .fila-producto .fp-tipo { flex: 1; padding: 10px 6px; font-size: 12px; }
-    .fila-producto button {
-      background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.3);
-      color: #ef4444; border-radius: 8px; padding: 0 12px; cursor: pointer;
-    }
-    #iaStatus { font-size: 13px; margin-top: 12px; min-height: 18px; color: #94a3b8; }
-    #iaStatus.error { color: #ef4444; }
-    #iaStatus.ok { color: #10b981; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
   </style>
 </head>
 <body>
-  <div class="top-bar">
-    <div class="logo-section">
-      <img src="file:///D:/Usuarios/Pictures/MERCAMIO.png" alt="Mercamio" class="logo-img">
-      <div class="brand-text">
-        <h1>MERCAMIO</h1>
-        <p>Sistema de Audio Profesional</p>
+  <!-- ===== LOGIN ===== -->
+  <div id="pantallaLogin" class="pantalla-completa hidden">
+    <form class="login-card" id="formLogin" autocomplete="on">
+      <div class="marca-login">Mercamio</div>
+      <p class="sub">Audio en tienda. Ingresa con el usuario de tu sede.</p>
+      <input type="text" id="loginUsuario" placeholder="Usuario" autocomplete="username" autocapitalize="none" required>
+      <input type="password" id="loginClave" placeholder="Contraseña" autocomplete="current-password" required>
+      <button type="submit" class="boton boton-primary" id="btnLogin">Ingresar</button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+  </div>
+
+  <!-- ===== ACTIVAR AUDIO AL VOLVER A ABRIR ===== -->
+  <div id="pantallaIniciar" class="pantalla-completa hidden">
+    <div class="login-card">
+      <div class="marca-login" id="iniciarSede">Mercamio</div>
+      <p class="sub">El navegador necesita un toque antes de reproducir sonido. Tu música y tus audios programados ya están cargados.</p>
+      <button class="boton boton-primary" id="btnIniciarSistema">Activar audio</button>
+      <button class="boton" id="btnSalirIniciar">Cambiar de usuario</button>
+    </div>
+  </div>
+
+  <!-- ===== OTRA PESTAÑA ABIERTA ===== -->
+  <div id="pantallaDuplicada" class="pantalla-completa hidden">
+    <div class="login-card">
+      <div class="marca-login">Ya está abierto</div>
+      <p class="sub">Este usuario ya tiene el sistema abierto en otra pestaña o ventana de este equipo. Ciérrala para que los audios no suenen dos veces.</p>
+      <button class="boton boton-primary" onclick="location.reload()">Reintentar</button>
+    </div>
+  </div>
+
+  <header class="top-bar">
+    <div class="marca">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDu9AivkPbJWswSGkmLj-OKptPqwE3c_j_qA&s" alt="" class="logo-img" onerror="this.style.display='none'">
+      <div class="marca-texto">
+        <strong>Mercamio</strong>
+        <span>Audio en tienda</span>
       </div>
     </div>
-    <div class="top-actions">
-      <button id="agregarAudio" class="boton boton-primary">➕ Nuevo Audio</button>
-      <button id="togglePlayerBtn" class="boton">🎵 Reproductor</button>
-      <button id="abrirIABtn" class="boton">🎙️ Generador IA</button>
+    <div class="sesion-info">
+      <span class="sesion-chip" id="chipSede">—</span>
+      <button class="boton boton-mini" id="btnSalir">Salir</button>
+    </div>
+  </header>
+
+  <section class="consola" aria-label="Estado en vivo">
+    <div class="c-reloj">
+      <span id="estadoReloj">--:--:--</span>
+      <small id="fechaHoy"></small>
+    </div>
+    <div class="c-celda" id="celdaAnuncio">
+      <small><span class="lampara"></span>Al aire</small>
+      <strong id="estadoAnuncio">Nada sonando</strong>
+    </div>
+    <div class="c-celda" id="celdaProximo">
+      <small><span class="lampara"></span>Próximo anuncio</small>
+      <strong id="estadoProximo">Sin programar</strong>
+    </div>
+    <div class="c-celda" id="celdaMusica">
+      <small><span class="lampara"></span>Música</small>
+      <strong id="estadoMusica">Detenida</strong>
+    </div>
+  </section>
+
+  <main class="layout" id="layout">
+    <div class="principal">
+      <div class="seccion-head">
+        <div>
+          <h1>Audios programados</h1>
+          <p>Cada audio suena a su hora exacta. Si dos coinciden, esperan su turno.</p>
+        </div>
+        <div class="acciones">
+          <button id="agregarAudio" class="boton boton-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Nuevo audio
+          </button>
+          <button id="abrirIABtn" class="boton">Generador IA</button>
+          <button id="togglePlayerBtn" class="boton solo-movil">Música</button>
+        </div>
+      </div>
+
+      <div class="choques hidden" id="panelChoques">
+        <h4>Hay audios que coinciden en las próximas 24 horas</h4>
+        <p class="ayuda">Nunca sonarán al mismo tiempo: uno espera a que termine el otro. Si prefieres que cada uno suene a su hora exacta, corrige el horario.</p>
+        <div id="listaChoques"></div>
+      </div>
+
+      <div class="contenedor" id="contenedorAudios"></div>
+    </div>
+
+    <aside id="playerContainer" aria-label="Música de fondo">
+      <div class="player-header">
+        <h3>Música de fondo</h3>
+        <p id="cancionActual">Sin canción</p>
+        <div class="playlist-info"><span id="playlistCount">0 canciones</span></div>
+      </div>
+      <div id="controls">
+        <button id="shuffleBtn" title="Aleatorio" aria-label="Aleatorio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+        <button id="prevBtn" title="Anterior" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+        <button id="playPauseBtn" title="Reproducir o pausar" aria-label="Reproducir o pausar"></button>
+        <button id="nextBtn" title="Siguiente" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+        <button id="repeatBtn" title="Repetir canción" aria-label="Repetir canción"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></button>
+      </div>
+      <div class="volume-section">
+        <label for="musicVolume">Volumen</label>
+        <input type="range" id="musicVolume" min="0" max="1" step="0.01" value="0.85">
+      </div>
+      <div id="playlist"></div>
+      <input type="file" id="fileInput" accept="audio/*" multiple style="display:none;">
+      <div class="player-acciones">
+        <button class="boton boton-primary" id="addMoreFiles">Agregar canciones</button>
+        <button class="boton boton-danger" id="clearPlaylist">Vaciar lista</button>
+      </div>
+    </aside>
+  </main>
+
+  <audio id="musicPlayer" preload="auto"></audio>
+
+  <!-- ===== MODAL GENÉRICO ===== -->
+  <div id="modalGenerico" class="ia-overlay hidden">
+    <div class="ia-modal" style="max-width:460px;">
+      <div class="ia-modal-header"><h3 id="modalTitulo">Aviso</h3></div>
+      <div class="modal-texto" id="modalTexto"></div>
+      <div class="modal-botones" id="modalBotones"></div>
     </div>
   </div>
 
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Audios Programados</h2>
-      <p class="section-subtitle">Gestiona y programa tus audios de manera profesional</p>
-    </div>
-    <div class="contenedor" id="contenedorAudios"></div>
-  </div>
-
-  <div id="playerContainer">
-    <div class="player-header">
-      <h3>Reproductor de Música</h3>
-      <p>Control central de audio</p>
-    </div>
-    <div class="playlist-info">
-      <span id="playlistCount">0 canciones</span>
-    </div>
-    <div id="controls">
-      <button id="shuffleBtn" title="Aleatorio">🔀</button>
-      <button id="prevBtn" title="Anterior">⏮️</button>
-      <button id="playPauseBtn" title="Play/Pause">▶️</button>
-      <button id="nextBtn" title="Siguiente">⏭️</button>
-      <button id="repeatBtn" title="Repetir">🔁</button>
-    </div>
-    <div class="volume-section">
-      <label>🔊 Volumen</label>
-      <input type="range" id="musicVolume" min="0" max="1" step="0.01" value="0.85">
-    </div>
-    <div id="playlist"></div>
-    <input type="file" id="fileInput" accept="audio/*" multiple style="display:none;">
-    <button class="boton boton-primary" id="addMoreFiles">➕ Agregar Más Música</button>
-    <button class="boton boton-danger" id="clearPlaylist" style="margin-top:10px;">🗑️ Limpiar Lista</button>
-  </div>
-
-  <audio id="musicPlayer"></audio>
-
+  <!-- ===== GENERADOR IA (solo administrador) ===== -->
   <div id="iaOverlay" class="ia-overlay hidden">
     <div class="ia-modal">
       <div class="ia-modal-header">
-        <h3>🎙️ Generador de Anuncios con IA</h3>
-        <button id="cerrarIA">✕</button>
+        <h3>Generador de anuncios con IA</h3>
+        <button id="cerrarIA" aria-label="Cerrar">✕</button>
       </div>
 
       <div class="ia-section">
-        <button class="boton" id="cargarVoces">🔄 Cargar voces disponibles</button>
-        <select id="vozSelect"><option value="">-- Primero carga las voces --</option></select>
-        <p class="ia-hint">La conexión con ElevenLabs la maneja el servidor de este sitio, no necesitas pegar ninguna key aquí.</p>
+        <button class="boton" id="cargarVoces">Cargar voces disponibles</button>
+        <select id="vozSelect"><option value="">Primero carga las voces</option></select>
+        <p class="ia-hint">La conexión con ElevenLabs la maneja el servidor; no necesitas pegar ninguna clave aquí.</p>
       </div>
 
       <div class="ia-section">
-        <label>🏬 Sede (opcional)</label>
+        <label for="sedeInput">Sede (opcional)</label>
         <input type="text" id="sedeInput" placeholder="Ej: Centro Sur">
       </div>
 
       <div class="ia-section">
-        <label>📦 Productos</label>
+        <label>Productos</label>
         <div id="listaProductos"></div>
-        <button class="boton" id="agregarProducto">➕ Agregar producto</button>
+        <button class="boton" id="agregarProducto">Agregar producto</button>
       </div>
 
       <div class="ia-section">
-        <label>📅 Vigencia de la promoción</label>
+        <label>Vigencia de la promoción</label>
         <div style="display:flex; gap:8px;">
           <input type="date" id="fechaInicio" style="flex:1;">
           <input type="date" id="fechaVigencia" style="flex:1;">
         </div>
-        <p class="ia-hint">Fecha inicio (opcional) y fecha fin. Si dejas la de inicio vacía, se dirá solo "hasta el...".</p>
+        <p class="ia-hint">Fecha de inicio (opcional) y fecha de fin. Sin fecha de inicio se dirá solo "hasta el…".</p>
       </div>
 
-      <button class="boton boton-primary" id="generarTextoBtn">✍️ Generar guion del anuncio</button>
+      <button class="boton boton-primary" id="generarTextoBtn">Generar guion del anuncio</button>
 
       <div class="ia-section">
-        <label>📝 Guion (puedes editarlo antes de generar el audio)</label>
-        <textarea id="guionAnuncio" rows="5" placeholder="Aquí aparecerá el guion generado..."></textarea>
+        <label for="guionAnuncio">Guion (puedes editarlo antes de crear el audio)</label>
+        <textarea id="guionAnuncio" rows="5" placeholder="Aquí aparecerá el guion generado"></textarea>
       </div>
 
-      <button class="boton boton-primary" id="generarAudioBtn">🔊 Generar y descargar audio</button>
+      <button class="boton boton-primary" id="generarAudioBtn">Generar y descargar audio</button>
       <div id="iaStatus"></div>
     </div>
   </div>
 
   <footer>
-    <p>Desarrollado por <span class="dev-name">Sebastián Flores</span></p>
-    <p style="font-size: 11px; margin-top: 5px; opacity: 0.6;">Audios Programados Mercamio © 2026</p>
+    <span>Desarrollado por <span class="dev-name">Sebastián Flores</span></span>
+    <span>Audios Mercamio © 2026</span>
   </footer>
 
 <script>
-// ========== OPTIMIZACIONES Y CORRECCIONES ==========
+// =====================================================================
+//  AUDIOS PROGRAMADOS MERCAMIO PRO  ·  v2
+//  - Usuarios por sede (cada sede guarda su propia música y audios)
+//  - Programador con reloj exacto (hora absoluta, sin acumular retraso)
+//  - Cola de anuncios: nunca suenan dos a la vez
+//  - Detector de choques con corrección automática
+// =====================================================================
 
-// Inicialización de AudioContext
-let audioCtx;
-function initAudio() {
-  const AC = window.AudioContext || window.webkitAudioContext;
-  if (!audioCtx && AC) audioCtx = new AC();
+const $ = (id) => document.getElementById(id);
+
+// ---------- Ajustes generales ----------
+const TOLERANCIA_RETRASO_MS = 90 * 1000;   // si un disparo llega más tarde que esto (PC suspendido), se omite
+const MARGEN_CHOQUE_MS = 3 * 1000;         // espacio mínimo entre dos anuncios
+const HORIZONTE_CHOQUES_H = 24;            // cuántas horas hacia adelante revisa choques
+const FADE_MS = 900;                       // duración de subir/bajar volumen de la música
+const MAX_HISTORIAL = 20;
+
+// ---------- localStorage seguro ----------
+function lsGet(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+function lsDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
+
+// ---------- Utilidades de tiempo ----------
+const pad = (n) => String(n).padStart(2, '0');
+function horaTexto(ms, conSeg = true) {
+  const d = new Date(ms);
+  return `${pad(d.getHours())}:${pad(d.getMinutes())}${conSeg ? ':' + pad(d.getSeconds()) : ''}`;
 }
-
-// Validación de archivos de audio
-function canPlay(file) {
-  const audio = document.createElement('audio');
-  if (file.type && audio.canPlayType(file.type)) return true;
-  const name = (file.name || '').toLowerCase();
-  return ['.mp3','.wav','.ogg','.m4a','.aac','.flac','.webm','.opus','.3gp'].some(e => name.endsWith(e));
+function duracionTexto(ms) {
+  const total = Math.max(0, Math.ceil(ms / 1000));
+  const h = Math.floor(total / 3600), m = Math.floor((total % 3600) / 60), s = total % 60;
+  return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
 }
-
-// ========== VARIABLES GLOBALES DEL REPRODUCTOR ==========
-const musicPlayer = document.getElementById('musicPlayer');
-let playlist = [];
-let currentTrack = 0;
-let isPlaying = false;
-let scheduledActiveCount = 0;
-let mainWasPlaying = false;
-const playingScheduled = new Set();
-const floorOrder = [];
-let shuffleMode = false;
-let repeatMode = false;
-
-// ========== GESTIÓN DE LA PLAYLIST (CORREGIDO) ==========
-
-// Función para actualizar el contador de canciones
-function updatePlaylistCount() {
-  document.getElementById('playlistCount').textContent = `${playlist.length} ${playlist.length === 1 ? 'canción' : 'canciones'}`;
+function fechaConHora(baseMs, hhmm, sumarDias = 0) {
+  const [h, m] = hhmm.split(':').map(Number);
+  const d = new Date(baseMs);
+  d.setDate(d.getDate() + sumarDias);
+  d.setHours(h, m, 0, 0);
+  return d.getTime();
 }
+function esHoy(ms) { return new Date(ms).toDateString() === new Date().toDateString(); }
 
-// Función para agregar archivos (CORREGIDO - ahora AGREGA en lugar de reemplazar)
-function addFiles(files) {
-  const valid = files.filter(canPlay);
-  if (!valid.length) {
-    alert('No se encontraron archivos de audio compatibles');
-    return;
-  }
-  
-  // CORRECCIÓN: Agregar archivos en lugar de reemplazar
-  const wasEmpty = playlist.length === 0;
-  playlist.push(...valid);
-  
-  // Si la playlist estaba vacía, cargar la primera canción
-  if (wasEmpty) {
-    loadTrack(0);
-  }
-  
-  renderPlaylist();
-  updatePlaylistCount();
-  
-  // Notificación visual
-  showNotification(`✅ ${valid.length} ${valid.length === 1 ? 'canción agregada' : 'canciones agregadas'}`);
+// ---------- Notificaciones ----------
+function showNotification(message, tipo = 'ok') {
+  const n = document.createElement('div');
+  const barra = tipo === 'error' ? '#D93A26' : tipo === 'warn' ? '#B7791F' : '#6FC3A6';
+  n.style.cssText = `position:fixed;bottom:20px;right:20px;max-width:min(420px, calc(100vw - 40px));background:#17241F;color:#fff;
+    padding:12px 16px 12px 18px;border-radius:8px;border-left:4px solid ${barra};box-shadow:0 12px 30px rgba(23,36,31,.3);
+    z-index:9999;font-weight:500;font-size:14px;animation:slideIn .25s ease-out;`;
+  n.textContent = message;
+  document.body.appendChild(n);
+  setTimeout(() => { n.style.animation = 'slideOut .2s ease-out'; setTimeout(() => n.remove(), 300); }, tipo === 'ok' ? 2200 : 4500);
 }
+(() => {
+  const st = document.createElement('style');
+  st.textContent = `@keyframes slideIn{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+    @keyframes slideOut{from{opacity:1}to{opacity:0}}`;
+  document.head.appendChild(st);
+})();
 
-// Función para mostrar notificaciones
-function showNotification(message) {
-  const notification = document.createElement('div');
-  notification.style.cssText = `
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    z-index: 9999;
-    font-weight: 600;
-    animation: slideIn 0.3s ease-out;
-  `;
-  notification.textContent = message;
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.style.animation = 'slideOut 0.3s ease-out';
-    setTimeout(() => notification.remove(), 300);
-  }, 2000);
-}
-
-// Agregar animaciones CSS
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes slideIn {
-    from { transform: translateX(400px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  @keyframes slideOut {
-    from { transform: translateX(0); opacity: 1; }
-    to { transform: translateX(400px); opacity: 0; }
-  }
-`;
-document.head.appendChild(style);
-
-// Función para renderizar la playlist (MEJORADA con botón eliminar)
-function renderPlaylist() {
-  const list = document.getElementById('playlist');
-  list.innerHTML = '';
-  
-  if (playlist.length === 0) {
-    list.innerHTML = '<p style="text-align:center;opacity:0.5;padding:20px;">No hay canciones en la lista</p>';
-    return;
-  }
-  
-  playlist.forEach((f, i) => {
-    const div = document.createElement('div');
-    div.className = 'track-item' + (i === currentTrack ? ' active' : '');
-    
-    const trackName = document.createElement('span');
-    trackName.textContent = f.name;
-    trackName.style.flex = '1';
-    trackName.style.overflow = 'hidden';
-    trackName.style.textOverflow = 'ellipsis';
-    trackName.style.whiteSpace = 'nowrap';
-    
-    const removeBtn = document.createElement('button');
-    removeBtn.className = 'track-remove';
-    removeBtn.textContent = '✕';
-    removeBtn.title = 'Eliminar';
-    removeBtn.onclick = (e) => {
-      e.stopPropagation();
-      removeTrack(i);
-    };
-    
-    div.appendChild(trackName);
-    div.appendChild(removeBtn);
-    
-    div.addEventListener('click', function() {
-      currentTrack = i;
-      loadTrack(i);
-      playMusic();
+// ---------- Modal genérico (reemplaza alert/confirm) ----------
+function preguntar(titulo, texto, botones) {
+  // botones: [{texto, valor, tipo:'primary'|'danger'|''}]
+  return new Promise((resolve) => {
+    $('modalTitulo').textContent = titulo;
+    $('modalTexto').textContent = texto;
+    const cont = $('modalBotones');
+    cont.innerHTML = '';
+    botones.forEach(b => {
+      const btn = document.createElement('button');
+      btn.className = 'boton' + (b.tipo === 'primary' ? ' boton-primary' : b.tipo === 'danger' ? ' boton-danger' : '');
+      btn.textContent = b.texto;
+      btn.onclick = () => { $('modalGenerico').classList.add('hidden'); resolve(b.valor); };
+      cont.appendChild(btn);
     });
-    
+    $('modalGenerico').classList.remove('hidden');
+  });
+}
+const avisar = (titulo, texto) => preguntar(titulo, texto, [{ texto: 'Entendido', valor: true, tipo: 'primary' }]);
+
+// =====================================================================
+//  SESIÓN
+// =====================================================================
+let sesion = null; // { token, usuario, rol, sede }
+const esAdmin = () => sesion && sesion.rol === 'admin';
+
+async function api(ruta, opciones = {}) {
+  const headers = Object.assign({}, opciones.headers || {});
+  if (sesion && sesion.token) headers.Authorization = 'Bearer ' + sesion.token;
+  return fetch('/.netlify/functions/' + ruta, Object.assign({}, opciones, { headers }));
+}
+
+async function arrancar() {
+  const guardada = lsGet('mercamio_sesion');
+  if (!guardada || !guardada.token) return mostrarLogin();
+  sesion = guardada;
+  try {
+    const res = await api('login');
+    if (res.status === 401) { lsDel('mercamio_sesion'); sesion = null; return mostrarLogin('Tu sesión venció, ingresa de nuevo.'); }
+    if (res.ok) {
+      const d = await res.json();
+      sesion = Object.assign(sesion, { rol: d.rol, sede: d.sede, usuario: d.usuario });
+      lsSet('mercamio_sesion', sesion);
+    }
+  } catch (e) {
+    // Sin internet: se permite seguir con la sesión guardada
+    console.warn('No se pudo validar la sesión (sin conexión). Se usa la guardada.');
+  }
+  await entrar(false);
+}
+
+function mostrarLogin(msg = '') {
+  $('pantallaLogin').classList.remove('hidden');
+  $('loginError').textContent = msg;
+  setTimeout(() => $('loginUsuario').focus(), 50);
+}
+
+$('formLogin').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = $('btnLogin');
+  btn.disabled = true; btn.textContent = 'Ingresando...';
+  $('loginError').textContent = '';
+  try {
+    const res = await fetch('/.netlify/functions/login', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ usuario: $('loginUsuario').value, clave: $('loginClave').value })
+    });
+    const d = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(d.error || 'No se pudo ingresar');
+    sesion = { token: d.token, usuario: d.usuario, rol: d.rol, sede: d.sede };
+    lsSet('mercamio_sesion', sesion);
+    $('pantallaLogin').classList.add('hidden');
+    $('loginClave').value = '';
+    await entrar(true);
+  } catch (err) {
+    $('loginError').textContent = err.message === 'Failed to fetch' ? 'Sin conexión con el servidor' : err.message;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Ingresar';
+  }
+});
+
+async function cerrarSesion() {
+  const hayActivos = anuncios.some(a => a.activo);
+  const ok = await preguntar('Cerrar sesión',
+    hayActivos ? 'Hay audios programados activos. Si sales, dejarán de sonar en este equipo hasta que vuelvas a ingresar.\n\nTu música y audios quedan guardados.' : 'Tu música y audios quedan guardados para la próxima vez.',
+    [{ texto: 'Sí, salir', valor: true, tipo: 'danger' }, { texto: 'Cancelar', valor: false }]);
+  if (!ok) return;
+  saliendo = true;
+  lsDel('mercamio_sesion');
+  location.reload();
+}
+$('btnSalir').addEventListener('click', cerrarSesion);
+$('btnSalirIniciar').addEventListener('click', () => { saliendo = true; lsDel('mercamio_sesion'); location.reload(); });
+
+// Evitar dos pestañas del mismo usuario (los audios sonarían doble)
+async function bloquearPestanaUnica() {
+  if (!navigator.locks) return true;
+  return new Promise((resolve) => {
+    navigator.locks.request('mercamio_' + sesion.usuario, { ifAvailable: true }, (lock) => {
+      if (!lock) { resolve(false); return; }
+      resolve(true);
+      return new Promise(() => {}); // se mantiene mientras la pestaña esté abierta
+    });
+  });
+}
+
+async function entrar(vieneDeLogin) {
+  if (!(await bloquearPestanaUnica())) {
+    $('pantallaDuplicada').classList.remove('hidden');
+    return;
+  }
+
+  $('chipSede').textContent = sesion.sede;
+  $('chipSede').classList.toggle('admin', esAdmin());
+  document.title = `Audios Mercamio · ${sesion.sede}`;
+  configurarIA();
+
+  await DB.abrir('mercamio_' + sesion.usuario);
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+
+  await cargarMusicaGuardada();
+  await cargarAnunciosGuardados();
+  iniciarReloj();
+
+  if (vieneDeLogin) {
+    // El clic de "Ingresar" ya cuenta como interacción: se puede reproducir
+    activarSistema();
+  } else {
+    $('iniciarSede').textContent = sesion.sede;
+    $('pantallaIniciar').classList.remove('hidden');
+  }
+}
+
+$('btnIniciarSistema').addEventListener('click', () => {
+  $('pantallaIniciar').classList.add('hidden');
+  activarSistema();
+});
+
+let sistemaActivo = false;
+function activarSistema() {
+  sistemaActivo = true;
+  // "Despertar" los elementos de audio con este toque del usuario
+  [musicPlayer, ...anuncios.map(a => a.audioEl)].forEach(el => { try { el.load(); } catch (e) {} });
+  pedirWakeLock();
+  // Recalcular próximos disparos de los audios activos
+  anuncios.forEach(a => { if (a.activo) a.proximo = calcularProximo(a, Date.now()); renderTarjeta(a); });
+  revisarChoques();
+  if (musica.intencion && musica.lista.length) reproducirMusica();
+}
+
+// Mantener la pantalla/PC despierto mientras la app está abierta
+let wakeLock = null;
+async function pedirWakeLock() {
+  try {
+    if ('wakeLock' in navigator && document.visibilityState === 'visible') {
+      wakeLock = await navigator.wakeLock.request('screen');
+    }
+  } catch (e) { /* el navegador puede negarlo, no es grave */ }
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') { pedirWakeLock(); tick(); }
+});
+
+let saliendo = false;
+window.addEventListener('beforeunload', (e) => {
+  if (saliendo || !sistemaActivo) return;
+  if (anuncios.some(a => a.activo) || musica.intencion) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+
+// =====================================================================
+//  BASE DE DATOS LOCAL (una por usuario/sede)
+// =====================================================================
+const DB = {
+  db: null,
+  abrir(nombre) {
+    return new Promise((resolve) => {
+      if (!window.indexedDB) { showNotification('⚠️ Este navegador no permite guardar datos', 'warn'); return resolve(); }
+      const req = indexedDB.open(nombre, 1);
+      req.onupgradeneeded = () => {
+        const d = req.result;
+        if (!d.objectStoreNames.contains('musica')) d.createObjectStore('musica', { keyPath: 'id' });
+        if (!d.objectStoreNames.contains('audios')) d.createObjectStore('audios', { keyPath: 'id' });
+        if (!d.objectStoreNames.contains('ajustes')) d.createObjectStore('ajustes');
+      };
+      req.onsuccess = () => { this.db = req.result; resolve(); };
+      req.onerror = () => { console.error(req.error); showNotification('⚠️ No se pudo abrir el almacenamiento. Los cambios no se guardarán.', 'warn'); resolve(); };
+    });
+  },
+  _op(store, modo, fn) {
+    return new Promise((resolve) => {
+      if (!this.db) return resolve(null);
+      try {
+        const tx = this.db.transaction(store, modo);
+        const r = fn(tx.objectStore(store));
+        tx.oncomplete = () => resolve(r && 'result' in r ? r.result : null);
+        tx.onerror = tx.onabort = () => {
+          console.error(tx.error);
+          if (tx.error && tx.error.name === 'QuotaExceededError') showNotification('❌ No hay espacio para guardar más archivos', 'error');
+          resolve(null);
+        };
+      } catch (e) { console.error(e); resolve(null); }
+    });
+  },
+  todos(store) { return this._op(store, 'readonly', s => s.getAll()).then(r => r || []); },
+  leer(store, key) { return this._op(store, 'readonly', s => s.get(key)); },
+  guardar(store, valor, key) { return this._op(store, 'readwrite', s => key === undefined ? s.put(valor) : s.put(valor, key)); },
+  borrar(store, key) { return this._op(store, 'readwrite', s => s.delete(key)); },
+  vaciar(store) { return this._op(store, 'readwrite', s => s.clear()); }
+};
+
+const nuevoId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+
+function canPlay(file) {
+  const a = document.createElement('audio');
+  if (file.type && a.canPlayType(file.type)) return true;
+  const name = (file.name || '').toLowerCase();
+  return ['.mp3', '.wav', '.ogg', '.m4a', '.aac', '.flac', '.webm', '.opus', '.3gp'].some(e => name.endsWith(e));
+}
+
+// =====================================================================
+//  FADE (subir / bajar volumen suave, resistente a pestañas en segundo plano)
+// =====================================================================
+const fades = new WeakMap();
+function fadeA(el, destino, ms = FADE_MS) {
+  return new Promise((resolve) => {
+    const anterior = fades.get(el);
+    if (anterior) { clearInterval(anterior.timer); anterior.resolve(); }
+    const desde = el.volume, inicio = Date.now();
+    if (ms <= 0 || Math.abs(desde - destino) < 0.01) { el.volume = destino; return resolve(); }
+    const ctl = { resolve };
+    ctl.timer = setInterval(() => {
+      const p = Math.min(1, (Date.now() - inicio) / ms);   // basado en tiempo real, no en número de pasos
+      el.volume = Math.max(0, Math.min(1, desde + (destino - desde) * p));
+      if (p >= 1) { clearInterval(ctl.timer); fades.delete(el); resolve(); }
+    }, 40);
+    fades.set(el, ctl);
+  });
+}
+
+// =====================================================================
+//  REPRODUCTOR DE MÚSICA
+// =====================================================================
+const musicPlayer = $('musicPlayer');
+const musica = {
+  lista: [],          // [{id, nombre, blob, orden}]
+  actual: 0,
+  intencion: false,   // el usuario quiere que la música suene (se respeta tras cada anuncio)
+  aleatorio: false,
+  repetir: false,
+  volumen: 0.85,
+  bolsa: [],          // orden aleatorio sin repetir
+  historial: [],      // para "anterior" en aleatorio
+  fallosSeguidos: 0,
+  url: null
+};
+
+function guardarAjustesMusica() {
+  DB.guardar('ajustes', {
+    volumen: musica.volumen, aleatorio: musica.aleatorio, repetir: musica.repetir,
+    actualId: musica.lista[musica.actual] ? musica.lista[musica.actual].id : null,
+    intencion: musica.intencion
+  }, 'musica');
+}
+
+async function cargarMusicaGuardada() {
+  const canciones = (await DB.todos('musica')).sort((a, b) => a.orden - b.orden);
+  musica.lista = canciones;
+  const aj = (await DB.leer('ajustes', 'musica')) || {};
+  musica.volumen = typeof aj.volumen === 'number' ? aj.volumen : 0.85;
+  musica.aleatorio = !!aj.aleatorio;
+  musica.repetir = !!aj.repetir;
+  musica.intencion = !!aj.intencion;
+  const idx = musica.lista.findIndex(c => c.id === aj.actualId);
+  musica.actual = idx >= 0 ? idx : 0;
+  $('musicVolume').value = musica.volumen;
+  $('shuffleBtn').classList.toggle('active', musica.aleatorio);
+  $('repeatBtn').classList.toggle('active', musica.repetir);
+  if (musica.lista.length) cargarCancion(musica.actual);
+  renderPlaylist();
+  actualizarEstado();
+}
+
+async function addFiles(files) {
+  const validos = files.filter(canPlay);
+  if (!validos.length) { avisar('Archivo no compatible', 'No se encontraron archivos de audio compatibles.'); return; }
+  const estabaVacia = musica.lista.length === 0;
+  let orden = musica.lista.length ? Math.max(...musica.lista.map(c => c.orden)) + 1 : 0;
+  for (const f of validos) {
+    const c = { id: nuevoId(), nombre: f.name, blob: f, orden: orden++ };
+    musica.lista.push(c);
+    await DB.guardar('musica', c);
+  }
+  musica.bolsa = [];
+  if (estabaVacia) cargarCancion(0);
+  renderPlaylist();
+  guardarAjustesMusica();
+  showNotification(`✅ ${validos.length} ${validos.length === 1 ? 'canción agregada' : 'canciones agregadas'}`);
+}
+
+function renderPlaylist() {
+  const list = $('playlist');
+  list.innerHTML = '';
+  $('playlistCount').textContent = `${musica.lista.length} ${musica.lista.length === 1 ? 'canción' : 'canciones'}`;
+  const c = musica.lista[musica.actual];
+  $('cancionActual').textContent = c ? '♪ ' + c.nombre : 'Sin canción';
+  if (!musica.lista.length) {
+    list.innerHTML = '<p class="playlist-vacia">Agrega canciones para que suene música entre anuncios.</p>';
+    return;
+  }
+  musica.lista.forEach((cancion, i) => {
+    const div = document.createElement('div');
+    div.className = 'track-item' + (i === musica.actual ? ' active' : '');
+    const nombre = document.createElement('span');
+    nombre.textContent = cancion.nombre;
+    nombre.style.cssText = 'flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
+    const quitar = document.createElement('button');
+    quitar.className = 'track-remove';
+    quitar.textContent = '✕';
+    quitar.title = 'Quitar de la lista';
+    quitar.setAttribute('aria-label', 'Quitar ' + cancion.nombre);
+    quitar.onclick = (e) => { e.stopPropagation(); removeTrack(cancion.id); };
+    div.append(nombre, quitar);
+    div.addEventListener('click', () => { irACancion(i, true); });
     list.appendChild(div);
   });
 }
 
-// Función para eliminar una canción
-function removeTrack(index) {
-  if (index < 0 || index >= playlist.length) return;
-  
-  const wasPlaying = (index === currentTrack && isPlaying);
-  
-  playlist.splice(index, 1);
-  
-  // Ajustar el índice actual
-  if (currentTrack >= playlist.length) {
-    currentTrack = playlist.length - 1;
-  }
-  
+function cargarCancion(i) {
+  const c = musica.lista[i];
+  if (!c) return;
+  if (musica.url) URL.revokeObjectURL(musica.url);
+  musica.url = URL.createObjectURL(c.blob);
+  musica.actual = i;
+  musicPlayer.src = musica.url;
   renderPlaylist();
-  updatePlaylistCount();
-  
-  // Si estábamos reproduciendo la canción eliminada, cargar la siguiente
-  if (wasPlaying && playlist.length > 0) {
-    loadTrack(currentTrack);
-    playMusic();
-  } else if (playlist.length === 0) {
-    musicPlayer.src = '';
-    isPlaying = false;
-    document.getElementById('playPauseBtn').textContent = '▶️';
-  }
+  guardarAjustesMusica();
 }
 
-// Función para limpiar toda la playlist
-function clearPlaylist() {
-  if (playlist.length === 0) return;
-  
-  if (confirm(`¿Estás seguro de eliminar las ${playlist.length} canciones?`)) {
-    playlist = [];
-    currentTrack = 0;
-    musicPlayer.pause();
-    musicPlayer.src = '';
-    isPlaying = false;
-    document.getElementById('playPauseBtn').textContent = '▶️';
-    renderPlaylist();
-    updatePlaylistCount();
-    showNotification('🗑️ Lista de reproducción limpiada');
-  }
-}
+// ¿Hay un anuncio sonando o esperando? Entonces la música no debe sonar.
+const anuncioEnCurso = () => !!sonando || cola.length > 0;
 
-// Cargar una canción
-function loadTrack(i) {
-  if (!playlist[i]) return;
-  
-  // Revocar URL anterior para liberar memoria
-  if (musicPlayer.src && musicPlayer.src.startsWith('blob:')) {
-    URL.revokeObjectURL(musicPlayer.src);
-  }
-  
-  musicPlayer.src = URL.createObjectURL(playlist[i]);
-  initAudio();
-  musicPlayer.volume = parseFloat(document.getElementById('musicVolume').value);
-  renderPlaylist();
-  
-  if (isPlaying) {
-    playMusic();
-  }
-}
-
-// Reproducir música
-async function playMusic() {
-  if (playlist.length === 0) {
-    alert('Agrega canciones primero');
-    return;
-  }
-  
+async function reproducirMusica() {
+  if (!musica.lista.length) { showNotification('Agrega canciones primero', 'warn'); return; }
+  musica.intencion = true;
+  guardarAjustesMusica();
+  actualizarBotonPlay();
+  if (!sistemaActivo) return;
+  if (anuncioEnCurso()) { actualizarEstado(); return; } // se reanuda sola al terminar el anuncio
+  if (!musicPlayer.src) cargarCancion(musica.actual);
+  musicPlayer.volume = 0;
   try {
     await musicPlayer.play();
-    isPlaying = true;
-    document.getElementById('playPauseBtn').textContent = '⏸️';
-  } catch(e) {
-    console.warn('Autoplay bloqueado:', e);
+    await fadeA(musicPlayer, musica.volumen);
+  } catch (e) {
+    if (e.name !== 'AbortError') console.warn('No se pudo reproducir la música:', e);
   }
+  actualizarEstado();
 }
 
-// Pausar música
-function pauseMusic() {
+async function pausarMusica() {
+  musica.intencion = false;
+  guardarAjustesMusica();
+  actualizarBotonPlay();
+  await fadeA(musicPlayer, 0, 400);
   musicPlayer.pause();
-  isPlaying = false;
-  document.getElementById('playPauseBtn').textContent = '▶️';
+  musicPlayer.volume = musica.volumen;
+  actualizarEstado();
 }
 
-// ========== EVENTOS DEL REPRODUCTOR ==========
-
-document.getElementById('togglePlayerBtn').addEventListener('click', function() {
-  document.getElementById('playerContainer').classList.toggle('hidden');
-});
-
-// CORREGIDO: El input ahora no reemplaza el valor, mantiene los archivos agregados
-document.getElementById('fileInput').addEventListener('change', function(e) {
-  if (this.files.length > 0) {
-    addFiles(Array.from(this.files));
-    // Limpiar el input para permitir agregar los mismos archivos nuevamente si se desea
-    this.value = '';
-  }
-});
-
-document.getElementById('addMoreFiles').addEventListener('click', function() {
-  document.getElementById('fileInput').click();
-});
-
-document.getElementById('clearPlaylist').addEventListener('click', clearPlaylist);
-
-document.getElementById('musicVolume').addEventListener('input', function() {
-  musicPlayer.volume = parseFloat(this.value);
-});
-
-document.getElementById('playPauseBtn').addEventListener('click', function() {
-  if (isPlaying) pauseMusic(); else playMusic();
-});
-
-document.getElementById('nextBtn').addEventListener('click', function() {
-  if (playlist.length === 0) return;
-  
-  if (shuffleMode) {
-    currentTrack = Math.floor(Math.random() * playlist.length);
-  } else {
-    currentTrack = (currentTrack + 1) % playlist.length;
-  }
-  loadTrack(currentTrack);
-  playMusic();
-});
-
-document.getElementById('prevBtn').addEventListener('click', function() {
-  if (playlist.length === 0) return;
-  
-  currentTrack = currentTrack > 0 ? currentTrack - 1 : playlist.length - 1;
-  loadTrack(currentTrack);
-  playMusic();
-});
-
-document.getElementById('shuffleBtn').addEventListener('click', function() {
-  shuffleMode = !shuffleMode;
-  this.classList.toggle('active', shuffleMode);
-  showNotification(shuffleMode ? '🔀 Modo aleatorio activado' : '➡️ Modo secuencial activado');
-});
-
-document.getElementById('repeatBtn').addEventListener('click', function() {
-  repeatMode = !repeatMode;
-  this.classList.toggle('active', repeatMode);
-  showNotification(repeatMode ? '🔁 Repetición activada' : '▶️ Repetición desactivada');
-});
-
-musicPlayer.addEventListener('ended', function() {
-  if (repeatMode) {
-    musicPlayer.currentTime = 0;
-    playMusic();
-  } else {
-    document.getElementById('nextBtn').click();
-  }
-});
-
-// ========== AUDIOS PROGRAMADOS (OPTIMIZADO) ==========
-
-let contador = 0;
-const intervalos = {};
-const tiemposRestantes = {};
-const historiales = {};
-
-document.getElementById('agregarAudio').addEventListener('click', crearAudio);
-
-function crearAudio() {
-  contador++;
-  const id = contador;
-  const caja = document.createElement('div');
-  caja.className = 'caja-audio';
-  caja.setAttribute('data-audio-id', id);
-  caja.innerHTML = `
-    <div class="audio-header">
-      <div class="nombre-audio">Audio ${id}</div>
-      <span class="status-badge status-programado">⏳ No Iniciado</span>
-    </div>
-    <input type="file" accept="audio/*" id="archivo${id}">
-    <audio id="audio${id}" controls style="width:100%;margin:12px 0" preload="metadata"></audio>
-    <div class="schedule-controls">
-      <label>🕐 Hora de inicio (opcional)</label>
-      <input type="time" id="horaInicio${id}">
-      <label>⏱️ Repetir cada (minutos)</label>
-      <input type="number" id="tiempo${id}" min="1" value="30">
-    </div>
-    <button class="boton boton-primary btn-iniciar" data-id="${id}">▶️ Iniciar Programación</button>
-    <button class="boton boton-danger btn-eliminar" data-id="${id}">🗑️ Eliminar</button>
-    <label style="display:block;font-size:11px;color:#64748b;margin-top:15px;text-transform:uppercase;">🔊 Volumen del Audio</label>
-    <input type="range" min="0" max="1" step="0.01" value="0.85" id="volumen${id}" class="volumen-audio">
-    <div class="temporizador" id="temp${id}">--:--</div>
-    <div class="acordeon">
-      <button class="btn-toggle-panel" data-panel="hist${id}">📝 Historial</button>
-      <div class="panel" id="hist${id}"><p style="text-align:center;opacity:0.5;">Sin reproducciones</p></div>
-    </div>
-  `;
-  
-  document.getElementById('contenedorAudios').appendChild(caja);
-  
-  // Eventos con delegación mejorada
-  setupAudioEvents(id, caja);
+// Para anuncios: baja la música suave y la pausa, sin cambiar la intención del usuario
+async function silenciarMusicaParaAnuncio() {
+  if (musicPlayer.paused) return;
+  await fadeA(musicPlayer, 0);
+  musicPlayer.pause();
+}
+async function reanudarMusicaTrasAnuncio() {
+  if (!musica.intencion || !musica.lista.length || anuncioEnCurso()) return;
+  musicPlayer.volume = 0;
+  try { await musicPlayer.play(); await fadeA(musicPlayer, musica.volumen); }
+  catch (e) { if (e.name !== 'AbortError') console.warn(e); }
+  actualizarEstado();
 }
 
-function setupAudioEvents(id, caja) {
-  const archivo = document.getElementById(`archivo${id}`);
-  const audio = document.getElementById(`audio${id}`);
-  const volumen = document.getElementById(`volumen${id}`);
-  
-  // Evento de carga de archivo
-  archivo.addEventListener('change', function() {
-    if (this.files[0]) {
-      // Revocar URL anterior
-      if (audio.src && audio.src.startsWith('blob:')) {
-        URL.revokeObjectURL(audio.src);
-      }
-      
-      audio.src = URL.createObjectURL(this.files[0]);
-      audio.volume = parseFloat(volumen.value);
-      caja.querySelector('.nombre-audio').textContent = this.files[0].name;
+function irACancion(i, reproducir) {
+  if (!musica.lista.length) return;
+  musica.historial.push(musica.actual);
+  if (musica.historial.length > 50) musica.historial.shift();
+  cargarCancion(i);
+  if (reproducir || musica.intencion) reproducirMusica();
+}
+
+function indiceSiguiente() {
+  const n = musica.lista.length;
+  if (!musica.aleatorio || n < 2) return (musica.actual + 1) % n;
+  // Bolsa aleatoria: suenan todas antes de repetir, y nunca la misma dos veces seguidas
+  if (!musica.bolsa.length) {
+    musica.bolsa = musica.lista.map((_, i) => i).filter(i => i !== musica.actual);
+    for (let i = musica.bolsa.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [musica.bolsa[i], musica.bolsa[j]] = [musica.bolsa[j], musica.bolsa[i]];
     }
-  });
-  
-  // Evento de volumen
-  volumen.addEventListener('input', function() {
-    audio.volume = parseFloat(this.value);
-  });
-  
-  // Botón iniciar
-  caja.querySelector('.btn-iniciar').addEventListener('click', function() {
-    iniciar(id);
-  });
-  
-  // Botón eliminar
-  caja.querySelector('.btn-eliminar').addEventListener('click', function() {
-    eliminar(this);
-  });
-  
-  // Toggle panel
-  caja.querySelector('.btn-toggle-panel').addEventListener('click', function() {
-    togglePanel(this.getAttribute('data-panel'));
-  });
+  }
+  return musica.bolsa.shift();
 }
 
-function iniciar(id) {
-  const audio = document.getElementById(`audio${id}`);
-  if (!audio.src || audio.src === window.location.href) {
-    alert('⚠️ Carga un archivo de audio primero');
+function siguiente() { if (musica.lista.length) irACancion(indiceSiguiente(), false); }
+function anterior() {
+  if (!musica.lista.length) return;
+  if (musicPlayer.currentTime > 3) { musicPlayer.currentTime = 0; return; }
+  if (musica.aleatorio && musica.historial.length) {
+    const prev = musica.historial.pop();
+    cargarCancion(Math.min(prev, musica.lista.length - 1));
+    if (musica.intencion) reproducirMusica();
     return;
   }
-  
-  const horaInput = document.getElementById(`horaInicio${id}`);
-  const tiempoMin = parseInt(document.getElementById(`tiempo${id}`).value) || 30;
-  
-  // Limpiar intervalo anterior si existe
-  if (intervalos[id]) {
-    clearInterval(intervalos[id]);
-    delete intervalos[id];
-  }
-  
-  historiales[id] = historiales[id] || [];
-  const caja = document.querySelector(`[data-audio-id="${id}"]`);
-  const badge = caja.querySelector('.status-badge');
-  
-  if (horaInput.value) {
-    const [h, m] = horaInput.value.split(':');
-    const ahora = new Date();
-    const programada = new Date();
-    programada.setHours(parseInt(h), parseInt(m), 0, 0);
-    
-    if (programada <= ahora) {
-      programada.setDate(programada.getDate() + 1);
-    }
-    
-    const delay = programada - ahora;
-    badge.className = 'status-badge status-programado';
-    badge.textContent = `⏳ Inicia ${horaInput.value}`;
-    
-    setTimeout(() => {
-      reproducirAudio(id, audio);
-      badge.className = 'status-badge status-activo';
-      badge.textContent = '🔴 Activo';
-      iniciarIntervalo(id, audio, tiempoMin);
-    }, delay);
-  } else {
-    reproducirAudio(id, audio);
-    badge.className = 'status-badge status-activo';
-    badge.textContent = '🔴 Activo';
-    iniciarIntervalo(id, audio, tiempoMin);
-  }
+  irACancion(musica.actual > 0 ? musica.actual - 1 : musica.lista.length - 1, false);
 }
 
-function iniciarIntervalo(id, audio, min) {
-  const seg = min * 60;
-  tiemposRestantes[id] = seg;
-  
-  // Usar requestAnimationFrame para mejor rendimiento
-  let lastUpdate = Date.now();
-  
-  intervalos[id] = setInterval(() => {
-    const now = Date.now();
-    const elapsed = Math.floor((now - lastUpdate) / 1000);
-    
-    if (elapsed >= 1) {
-      tiemposRestantes[id] -= elapsed;
-      lastUpdate = now;
-      
-      if (tiemposRestantes[id] <= 0) {
-        reproducirAudio(id, audio);
-        tiemposRestantes[id] = seg;
-      }
-      
-      const m = Math.floor(tiemposRestantes[id] / 60);
-      const s = tiemposRestantes[id] % 60;
-      const tempElem = document.getElementById(`temp${id}`);
-      
-      if (tempElem) {
-        tempElem.textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-      }
-    }
-  }, 100); // Actualizar más frecuentemente pero solo cambiar DOM cada segundo
+async function removeTrack(id) {
+  const i = musica.lista.findIndex(c => c.id === id);
+  if (i < 0) return;
+  const eraActual = i === musica.actual;
+  musica.lista.splice(i, 1);
+  await DB.borrar('musica', id);
+  musica.bolsa = []; musica.historial = [];
+
+  if (!musica.lista.length) {
+    musicPlayer.pause(); musicPlayer.removeAttribute('src'); musicPlayer.load();
+    if (musica.url) { URL.revokeObjectURL(musica.url); musica.url = null; }
+    musica.actual = 0; musica.intencion = false;
+  } else if (i < musica.actual) {
+    musica.actual--;                                    // CORRECCIÓN: el índice se corre una posición
+  } else if (eraActual) {
+    musica.actual = Math.min(i, musica.lista.length - 1);
+    cargarCancion(musica.actual);
+    if (musica.intencion && !anuncioEnCurso()) reproducirMusica();
+  }
+  renderPlaylist();
+  guardarAjustesMusica();
+  actualizarBotonPlay();
+  actualizarEstado();
 }
 
-function reproducirAudio(id, audio) {
-  // Gestión de reproducción con el reproductor principal
-  if (!playingScheduled.has(id)) {
-    playingScheduled.add(id);
-    if (scheduledActiveCount === 0) {
-      mainWasPlaying = !musicPlayer.paused;
-      if (mainWasPlaying) pauseMusic();
-    }
-    scheduledActiveCount++;
+async function clearPlaylist() {
+  if (!musica.lista.length) return;
+  const ok = await preguntar('Limpiar lista', `¿Eliminar las ${musica.lista.length} canciones de esta sede?`,
+    [{ texto: 'Sí, eliminar todas', valor: true, tipo: 'danger' }, { texto: 'Cancelar', valor: false }]);
+  if (!ok) return;
+  musica.lista = []; musica.actual = 0; musica.intencion = false; musica.bolsa = []; musica.historial = [];
+  musicPlayer.pause(); musicPlayer.removeAttribute('src'); musicPlayer.load();
+  if (musica.url) { URL.revokeObjectURL(musica.url); musica.url = null; }
+  await DB.vaciar('musica');
+  guardarAjustesMusica();
+  renderPlaylist(); actualizarBotonPlay(); actualizarEstado();
+  showNotification('🗑️ Lista de reproducción limpiada');
+}
+
+const ICONO_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+const ICONO_PAUSA = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+function actualizarBotonPlay() { $('playPauseBtn').innerHTML = musica.intencion ? ICONO_PAUSA : ICONO_PLAY; }
+
+// Eventos del reproductor
+$('togglePlayerBtn').addEventListener('click', () => {
+  const oculto = $('playerContainer').classList.toggle('hidden');
+  $('layout').classList.toggle('sin-musica', oculto);
+});
+$('fileInput').addEventListener('change', function () {
+  if (this.files.length) addFiles(Array.from(this.files));
+  this.value = '';
+});
+$('addMoreFiles').addEventListener('click', () => $('fileInput').click());
+$('clearPlaylist').addEventListener('click', clearPlaylist);
+$('musicVolume').addEventListener('input', function () {
+  musica.volumen = parseFloat(this.value);
+  if (!fades.get(musicPlayer) && !musicPlayer.paused) musicPlayer.volume = musica.volumen;
+  guardarAjustesMusica();
+});
+$('playPauseBtn').addEventListener('click', () => { musica.intencion ? pausarMusica() : reproducirMusica(); });
+$('nextBtn').addEventListener('click', siguiente);
+$('prevBtn').addEventListener('click', anterior);
+$('shuffleBtn').addEventListener('click', function () {
+  musica.aleatorio = !musica.aleatorio; musica.bolsa = [];
+  this.classList.toggle('active', musica.aleatorio);
+  guardarAjustesMusica();
+  showNotification(musica.aleatorio ? 'Modo aleatorio activado' : 'Modo en orden activado');
+});
+$('repeatBtn').addEventListener('click', function () {
+  musica.repetir = !musica.repetir;
+  this.classList.toggle('active', musica.repetir);
+  guardarAjustesMusica();
+  showNotification(musica.repetir ? 'Repetir canción activado' : 'Repetir canción desactivado');
+});
+musicPlayer.addEventListener('ended', () => {
+  if (musica.repetir) { musicPlayer.currentTime = 0; if (!anuncioEnCurso()) musicPlayer.play().catch(() => {}); }
+  else siguiente();
+});
+musicPlayer.addEventListener('playing', () => { musica.fallosSeguidos = 0; actualizarEstado(); });
+musicPlayer.addEventListener('error', () => {
+  if (!musicPlayer.getAttribute('src')) return;
+  const c = musica.lista[musica.actual];
+  musica.fallosSeguidos++;
+  if (musica.fallosSeguidos >= musica.lista.length) {
+    musica.intencion = false; actualizarBotonPlay(); actualizarEstado();
+    showNotification('❌ Ninguna canción se pudo reproducir. Revisa los archivos.', 'error');
+    return;
   }
-  
-  const idx = floorOrder.indexOf(id);
-  if (idx !== -1) floorOrder.splice(idx, 1);
-  floorOrder.push(id);
-  updateMuting();
-  
-  audio.currentTime = 0;
-  audio.play().catch(err => console.warn('Error al reproducir:', err));
-  
-  // Actualizar historial
-  historiales[id] = historiales[id] || [];
-  historiales[id].push(new Date());
-  
-  const hist = document.getElementById(`hist${id}`);
-  if (hist) {
-    hist.innerHTML = historiales[id].slice(-10).reverse().map(h =>
-      `<p>✅ ${h.toLocaleString('es-CO', {hour: '2-digit', minute: '2-digit', second: '2-digit'})}</p>`
-    ).join('');
+  showNotification(`⚠️ "${c ? c.nombre : 'Canción'}" está dañada, se salta a la siguiente`, 'warn');
+  siguiente();
+});
+musicPlayer.addEventListener('pause', actualizarEstado);
+
+// =====================================================================
+//  AUDIOS PROGRAMADOS
+// =====================================================================
+const anuncios = [];   // objetos de anuncio (ver crearAnuncio)
+const cola = [];       // anuncios esperando turno
+let sonando = null;    // anuncio que suena ahora
+
+const DATOS_GUARDADOS = ['id', 'nombre', 'blob', 'horaInicio', 'horaFin', 'cada', 'volumen', 'activo', 'ancla', 'duracion', 'historial', 'orden'];
+function guardarAnuncio(a) {
+  const d = {};
+  DATOS_GUARDADOS.forEach(k => d[k] = a[k]);
+  return DB.guardar('audios', d);
+}
+
+async function cargarAnunciosGuardados() {
+  const guardados = (await DB.todos('audios')).sort((a, b) => (a.orden || 0) - (b.orden || 0));
+  const inicializado = await DB.leer('ajustes', 'inicializado');
+  if (!guardados.length && !inicializado) {
+    for (let i = 0; i < 3; i++) await crearAnuncio();
+    DB.guardar('ajustes', true, 'inicializado');
+    return;
   }
-  
-  // Cleanup mejorado
-  const cleanup = () => {
-    if (playingScheduled.has(id)) {
-      playingScheduled.delete(id);
-      const idx = floorOrder.indexOf(id);
-      if (idx !== -1) floorOrder.splice(idx, 1);
-      scheduledActiveCount = Math.max(0, scheduledActiveCount - 1);
-      
-      if (scheduledActiveCount === 0 && mainWasPlaying) {
-        playMusic();
-        mainWasPlaying = false;
-      }
-      updateMuting();
-    }
+  guardados.forEach(g => crearAnuncio(g));
+}
+
+let numeroAudio = 0;
+async function crearAnuncio(datos) {
+  numeroAudio++;
+  const a = Object.assign({
+    id: nuevoId(), nombre: `Audio ${numeroAudio}`, blob: null, horaInicio: '', horaFin: '',
+    cada: 30, volumen: 0.85, activo: false, ancla: null, duracion: 0, historial: [], orden: Date.now() + numeroAudio
+  }, datos || {});
+  a.proximo = null; a.url = null; a.vigilante = null; a.reproduciendoSistema = false;
+  anuncios.push(a);
+  construirTarjeta(a);
+  if (!datos) await guardarAnuncio(a);
+  return a;
+}
+
+function construirTarjeta(a) {
+  const caja = document.createElement('div');
+  caja.className = 'caja-audio';
+  caja.innerHTML = `
+    <div class="card-top">
+      <input class="nombre-input" maxlength="60" title="Toca para cambiar el nombre" aria-label="Nombre del audio">
+      <span class="status-badge">Detenido</span>
+    </div>
+    <div class="temporizador"><span class="t-falta">--:--</span><span class="t-info">Sin programar</span></div>
+    <input type="file" accept="audio/*" class="in-archivo" aria-label="Archivo de audio">
+    <audio controls preload="metadata"></audio>
+    <div class="horario">
+      <label class="campo"><span>Desde</span><input type="time" class="in-desde"></label>
+      <label class="campo"><span>Hasta</span><input type="time" class="in-hasta"></label>
+      <label class="campo campo-cada"><span>Repetir cada (minutos)</span><input type="number" class="in-cada" min="1" max="1440" step="1" inputmode="numeric"></label>
+    </div>
+    <p class="hint">Sin "Desde", empieza al tocar Iniciar. "Hasta" necesita "Desde".</p>
+    <label class="vol"><span>Volumen</span><input type="range" min="0" max="1" step="0.01" class="in-volumen"></label>
+    <div class="aviso-choque"></div>
+    <div class="card-actions">
+      <button class="boton boton-primary btn-iniciar">Iniciar</button>
+      <button class="boton boton-danger btn-eliminar">Eliminar</button>
+    </div>
+    <div class="acordeon">
+      <button class="btn-toggle-panel">Ver historial</button>
+      <div class="panel"><p>Sin reproducciones todavía</p></div>
+    </div>`;
+  $('contenedorAudios').appendChild(caja);
+
+  const q = (s) => caja.querySelector(s);
+  a.el = caja;
+  a.audioEl = q('audio');
+  a.ui = {
+    nombre: q('.nombre-input'), badge: q('.status-badge'), archivo: q('.in-archivo'),
+    desde: q('.in-desde'), hasta: q('.in-hasta'), cada: q('.in-cada'), volumen: q('.in-volumen'),
+    iniciar: q('.btn-iniciar'), eliminar: q('.btn-eliminar'), choque: q('.aviso-choque'),
+    falta: q('.t-falta'), info: q('.t-info'), hist: q('.panel'), toggleHist: q('.btn-toggle-panel')
   };
-  
-  // Remover listeners anteriores
-  audio.removeEventListener('ended', cleanup);
-  audio.removeEventListener('pause', cleanup);
-  audio.addEventListener('ended', cleanup, { once: true });
-  audio.addEventListener('pause', cleanup, { once: true });
+
+  a.ui.nombre.value = a.nombre;
+  a.ui.desde.value = a.horaInicio;
+  a.ui.hasta.value = a.horaFin;
+  a.ui.cada.value = a.cada;
+  a.ui.volumen.value = a.volumen;
+  a.audioEl.volume = a.volumen;
+  if (a.blob) { a.url = URL.createObjectURL(a.blob); a.audioEl.src = a.url; }
+
+  a.ui.nombre.addEventListener('change', () => { a.nombre = a.ui.nombre.value.trim() || 'Audio'; guardarAnuncio(a); revisarChoques(); });
+
+  a.ui.archivo.addEventListener('change', async function () {
+    const f = this.files[0];
+    if (!f) return;
+    if (!canPlay(f)) { avisar('Archivo no compatible', 'Ese archivo no es un audio que el navegador pueda reproducir.'); this.value = ''; return; }
+    if (sonando === a) terminarAnuncio(a, 'reemplazado');
+    if (a.url) URL.revokeObjectURL(a.url);
+    a.blob = f; a.duracion = 0; a.archivoInvalido = false; a.yaAvisoInvalido = false;
+    a.ui.choque.classList.remove('visible');
+    a.url = URL.createObjectURL(f);
+    a.audioEl.src = a.url;
+    if (/^Audio \d+$/.test(a.nombre)) { a.nombre = f.name.replace(/\.[^.]+$/, ''); a.ui.nombre.value = a.nombre; }
+    this.value = '';
+    await guardarAnuncio(a);
+    showNotification('✅ Audio cargado y guardado');
+  });
+
+  a.audioEl.addEventListener('loadedmetadata', () => {
+    a.archivoInvalido = false; a.yaAvisoInvalido = false;
+    if (isFinite(a.audioEl.duration) && a.audioEl.duration > 0 && Math.abs(a.audioEl.duration - a.duracion) > 0.5) {
+      a.duracion = a.audioEl.duration;
+      guardarAnuncio(a);
+      revisarChoques();
+      renderTarjeta(a);
+    }
+  });
+
+  // Cambios de horario: si está activo, se recalcula al instante
+  const alCambiarHorario = () => {
+    const cada = parseInt(a.ui.cada.value, 10);
+    if (!Number.isInteger(cada) || cada < 1 || cada > 1440) {
+      a.ui.cada.value = a.cada;
+      showNotification('⚠️ "Repetir cada" debe ser un número entre 1 y 1440 minutos', 'warn');
+      return;
+    }
+    if (a.ui.hasta.value && !a.ui.desde.value) {
+      showNotification('⚠️ Para usar "Hasta" también pon la hora "Desde"', 'warn');
+    }
+    a.cada = cada; a.horaInicio = a.ui.desde.value; a.horaFin = a.ui.hasta.value;
+    if (a.activo) {
+      if (!a.horaInicio && !a.ancla) a.ancla = Date.now();
+      a.proximo = calcularProximo(a, Date.now());
+    }
+    guardarAnuncio(a);
+    revisarChoques();
+    renderTarjeta(a);
+  };
+  ['change'].forEach(ev => { a.ui.cada.addEventListener(ev, alCambiarHorario); a.ui.desde.addEventListener(ev, alCambiarHorario); a.ui.hasta.addEventListener(ev, alCambiarHorario); });
+
+  a.ui.volumen.addEventListener('input', () => {
+    a.volumen = parseFloat(a.ui.volumen.value);
+    a.audioEl.volume = a.volumen;
+  });
+  a.ui.volumen.addEventListener('change', () => guardarAnuncio(a));
+
+  a.ui.iniciar.addEventListener('click', () => (a.activo ? detenerProgramacion(a) : iniciarProgramacion(a)));
+  a.ui.eliminar.addEventListener('click', () => eliminarAnuncio(a));
+  a.ui.toggleHist.addEventListener('click', () => {
+    const abrir = a.ui.hist.style.display !== 'block';
+    a.ui.hist.style.display = abrir ? 'block' : 'none';
+    a.ui.toggleHist.textContent = abrir ? 'Ocultar historial' : 'Ver historial';
+  });
+
+  // Fin / error / pausa del anuncio
+  a.audioEl.addEventListener('ended', () => { if (sonando === a) terminarAnuncio(a, 'ok'); });
+  a.audioEl.addEventListener('error', () => {
+    if (!a.audioEl.getAttribute('src')) return;
+    a.archivoInvalido = true;
+    a.ui.choque.classList.add('visible');
+    a.ui.choque.textContent = 'Este archivo está dañado o no es compatible. Carga otro (MP3 o WAV).';
+    if (sonando === a) terminarAnuncio(a, 'error');
+    else if (!a.yaAvisoInvalido) { a.yaAvisoInvalido = true; showNotification(`❌ "${a.nombre}" no se puede reproducir. Carga otro archivo.`, 'error'); }
+  });
+  a.audioEl.addEventListener('pause', () => {
+    // Pausa manual desde los controles mientras sonaba por el sistema
+    if (sonando === a && !a.audioEl.ended && !a.reproduciendoSistema) terminarAnuncio(a, 'detenido');
+  });
+  // Si alguien da "play" en los controles de la tarjeta: se trata como prueba y pasa por la cola
+  a.audioEl.addEventListener('play', () => {
+    if (sonando === a || a.reproduciendoSistema) return;
+    a.audioEl.pause();
+    a.audioEl.currentTime = 0;
+    if (!a.blob) return;
+    encolar(a, 'prueba');
+  });
+
+  renderTarjeta(a);
+  renderHistorial(a);
 }
 
-function updateMuting() {
-  const current = floorOrder.length > 0 ? floorOrder[floorOrder.length - 1] : null;
-  
-  document.querySelectorAll('.caja-audio audio').forEach(a => {
-    const aid = parseInt(a.id.replace('audio',''));
-    if (playingScheduled.has(aid)) {
-      a.muted = (aid !== current);
-    } else {
-      a.muted = false;
-    }
+function renderTarjeta(a) {
+  if (!a.ui) return;
+  const b = a.ui.badge;
+  a.el.classList.toggle('sonando', sonando === a);
+  a.el.classList.toggle('en-cola', cola.includes(a));
+  a.el.classList.toggle('activa', !!a.activo);
+  if (sonando === a) { b.className = 'status-badge status-sonando'; b.textContent = 'Al aire'; }
+  else if (cola.includes(a)) { b.className = 'status-badge status-cola'; b.textContent = `En fila (${cola.indexOf(a) + 1})`; }
+  else if (a.activo) { b.className = 'status-badge status-activo'; b.textContent = 'Programado'; }
+  else { b.className = 'status-badge'; b.textContent = 'Detenido'; }
+
+  a.ui.iniciar.textContent = a.activo ? 'Detener' : 'Iniciar';
+  a.ui.iniciar.classList.toggle('boton-primary', !a.activo);
+
+  actualizarContador(a, Date.now());
+}
+
+function actualizarContador(a, ahora) {
+  if (!a.ui) return;
+  if (sonando === a) {
+    const resta = a.duracion ? (a.duracion - a.audioEl.currentTime) * 1000 : 0;
+    a.ui.falta.textContent = a.duracion ? duracionTexto(resta) : '--:--';
+    a.ui.info.textContent = 'Sonando ahora';
+    return;
+  }
+  if (!a.activo || !a.proximo) {
+    a.ui.falta.textContent = '--:--';
+    a.ui.info.textContent = a.activo ? 'Sin próximos horarios' : (a.blob ? 'Programación detenida' : 'Carga un audio');
+    return;
+  }
+  a.ui.falta.textContent = duracionTexto(a.proximo - ahora);
+  a.ui.info.textContent = `suena ${esHoy(a.proximo) ? 'hoy' : 'mañana'} a las ${horaTexto(a.proximo, false)}${a.duracion ? `, dura ${duracionTexto(a.duracion * 1000)}` : ''}`;
+}
+
+function renderHistorial(a) {
+  if (!a.historial.length) { a.ui.hist.innerHTML = '<p>Sin reproducciones todavía</p>'; return; }
+  a.ui.hist.innerHTML = '';
+  a.historial.slice(-10).reverse().forEach(h => {
+    const p = document.createElement('p');
+    const d = new Date(h.t);
+    p.textContent = `${h.icono} ${d.toLocaleDateString('es-CO', { day: '2-digit', month: 'short' })} ${horaTexto(h.t)} — ${h.txt}`;
+    a.ui.hist.appendChild(p);
   });
 }
 
-function eliminar(btn) {
-  const caja = btn.closest('.caja-audio');
-  if (!caja) return;
-  
-  if (!confirm('¿Eliminar este audio programado?')) return;
-  
-  const id = parseInt(caja.getAttribute('data-audio-id'));
-  
-  // Limpiar intervalo
-  if (intervalos[id]) {
-    clearInterval(intervalos[id]);
-    delete intervalos[id];
-  }
-  
-  // Detener y limpiar audio
-  const audio = document.getElementById(`audio${id}`);
-  if (audio) {
-    audio.pause();
-    if (audio.src && audio.src.startsWith('blob:')) {
-      URL.revokeObjectURL(audio.src);
+function registrar(a, icono, txt) {
+  a.historial.push({ t: Date.now(), icono, txt });
+  if (a.historial.length > MAX_HISTORIAL) a.historial = a.historial.slice(-MAX_HISTORIAL);
+  renderHistorial(a);
+  guardarAnuncio(a);
+}
+
+// ---------- Cálculo del próximo disparo (HORA ABSOLUTA: no acumula retraso) ----------
+//  Con "Desde": los horarios son Desde, Desde+cada, Desde+2·cada... hasta "Hasta" (o fin del día), todos los días.
+//  Sin "Desde": los horarios son ancla, ancla+cada, ... donde ancla = momento en que se tocó Iniciar.
+function calcularProximo(a, desde) {
+  const cadaMs = a.cada * 60000;
+  if (!(cadaMs > 0)) return null;
+
+  if (a.horaInicio) {
+    for (let dia = -1; dia <= 2; dia++) {
+      const ini = fechaConHora(desde, a.horaInicio, dia);
+      let fin;
+      if (a.horaFin) {
+        fin = fechaConHora(desde, a.horaFin, dia);
+        if (fin <= ini) fin += 24 * 3600 * 1000;                  // ventana que pasa la medianoche
+      } else {
+        fin = fechaConHora(desde, '00:00', dia + 1) - 1;          // hasta el final de ese día
+      }
+      if (desde <= ini) return ini;
+      const k = Math.ceil((desde - ini) / cadaMs);
+      const t = ini + k * cadaMs;
+      if (t <= fin) return t;
     }
-    audio.src = '';
+    return null;
   }
-  
-  // Actualizar estado de reproducción
-  if (playingScheduled.has(id)) {
-    playingScheduled.delete(id);
-    const idx = floorOrder.indexOf(id);
-    if (idx !== -1) floorOrder.splice(idx, 1);
-    scheduledActiveCount = Math.max(0, scheduledActiveCount - 1);
-    
-    if (scheduledActiveCount === 0 && mainWasPlaying) {
-      playMusic();
-      mainWasPlaying = false;
-    }
-    updateMuting();
+
+  if (!a.ancla) return null;
+  if (desde <= a.ancla) return a.ancla;
+  return a.ancla + Math.ceil((desde - a.ancla) / cadaMs) * cadaMs;
+}
+
+// ---------- Iniciar / detener ----------
+async function iniciarProgramacion(a) {
+  if (!a.blob) { avisar('Falta el audio', 'Carga un archivo de audio primero.'); return; }
+  if (a.archivoInvalido) { avisar('Archivo dañado', 'Este archivo no se puede reproducir. Carga otro audio (MP3 o WAV).'); return; }
+  const cada = parseInt(a.ui.cada.value, 10);
+  if (!Number.isInteger(cada) || cada < 1 || cada > 1440) { avisar('Revisa el intervalo', '"Repetir cada" debe ser un número entero entre 1 y 1440 minutos.'); return; }
+  if (a.ui.hasta.value && !a.ui.desde.value) { avisar('Falta la hora "Desde"', 'Para limitar con "Hasta" también debes poner la hora "Desde".'); return; }
+  a.cada = cada; a.horaInicio = a.ui.desde.value; a.horaFin = a.ui.hasta.value;
+
+  if (a.duracion && a.duracion > a.cada * 60) {
+    const sigue = await preguntar('El audio es más largo que el intervalo',
+      `"${a.nombre}" dura ${duracionTexto(a.duracion * 1000)} pero se repite cada ${a.cada} min. Nunca alcanzará a terminar antes de volver a sonar.`,
+      [{ texto: 'Iniciar de todos modos', valor: true, tipo: 'primary' }, { texto: 'Cancelar', valor: false }]);
+    if (!sigue) return;
   }
-  
-  // Limpiar datos
-  delete tiemposRestantes[id];
-  delete historiales[id];
-  
-  // Remover elemento del DOM
-  caja.remove();
-  
+
+  // Simular cómo quedaría y buscar choques ANTES de activar
+  const ahora = Date.now();
+  const prueba = Object.assign({}, a, { activo: true, ancla: a.horaInicio ? a.ancla : ahora });
+  const choques = buscarChoques(anunciosActivosCon(prueba)).filter(c => c.a === prueba || c.b === prueba);
+  let ajustado = false;
+  if (choques.length) {
+    const primero = choques[0];
+    const otro = primero.a === prueba ? primero.b : primero.a;
+    const ajuste = sugerirAjuste(prueba);
+    const botones = [];
+    if (ajuste) botones.push({ texto: `Ajustar automáticamente (${ajuste.descripcion})`, valor: 'ajustar', tipo: 'primary' });
+    botones.push({ texto: 'Iniciar igual (se pondrán en fila)', valor: 'igual' });
+    botones.push({ texto: 'Cancelar', valor: 'cancelar' });
+    const r = await preguntar('Este audio coincide con otro',
+      `"${a.nombre}" coincidiría con "${otro.nombre}" ${choques.length === 1 ? 'una vez' : choques.length + ' veces'} en las próximas ${HORIZONTE_CHOQUES_H} horas.\nPrimer choque: ${esHoy(primero.t) ? 'hoy' : 'mañana'} a las ${horaTexto(primero.t, false)}.\n\nSi inicias igual, nunca sonarán juntos: uno espera a que termine el otro (unos segundos de retraso).`,
+      botones);
+    if (r === 'cancelar') return;
+    if (r === 'ajustar') { aplicarAjuste(a, ajuste); ajustado = true; }
+  }
+
+  a.activo = true;
+  if (!a.horaInicio && !ajustado) a.ancla = ahora;   // sin "Desde": suena ya y luego cada X min exactos
+  a.proximo = calcularProximo(a, Date.now());
+  await guardarAnuncio(a);
+  registrar(a, '▶️', a.horaInicio ? `Programado desde ${a.horaInicio}${a.horaFin ? ' hasta ' + a.horaFin : ''} cada ${a.cada} min` : `Iniciado, cada ${a.cada} min`);
+  renderTarjeta(a);
+  revisarChoques();
+  tick(); // si el primer horario es "ya", suena de inmediato
+}
+
+async function detenerProgramacion(a) {
+  a.activo = false; a.proximo = null; a.ancla = null;
+  const i = cola.indexOf(a);
+  if (i >= 0) cola.splice(i, 1);
+  await guardarAnuncio(a);
+  registrar(a, '⏹️', 'Programación detenida');
+  renderTarjeta(a);
+  cola.forEach(renderTarjeta);
+  revisarChoques();
+  actualizarEstado();
+}
+
+async function eliminarAnuncio(a) {
+  const ok = await preguntar('Eliminar audio', `¿Eliminar "${a.nombre}" de esta sede?`,
+    [{ texto: 'Sí, eliminar', valor: true, tipo: 'danger' }, { texto: 'Cancelar', valor: false }]);
+  if (!ok) return;
+  a.activo = false; a.proximo = null;
+  const i = cola.indexOf(a);
+  if (i >= 0) cola.splice(i, 1);
+  if (sonando === a) terminarAnuncio(a, 'eliminado');   // CORRECCIÓN: libera la música siempre
+  a.audioEl.pause();
+  if (a.url) URL.revokeObjectURL(a.url);
+  a.audioEl.removeAttribute('src');
+  anuncios.splice(anuncios.indexOf(a), 1);
+  a.el.remove();
+  await DB.borrar('audios', a.id);
+  revisarChoques();
+  actualizarEstado();
   showNotification('🗑️ Audio eliminado');
 }
 
-function togglePanel(id) {
-  const p = document.getElementById(id);
-  if (p) {
-    p.style.display = p.style.display === 'block' ? 'none' : 'block';
-  }
-}
-
-// ========== GENERADOR IA (TTS con ElevenLabs) ==========
-
-const iaOverlay = document.getElementById('iaOverlay');
-const iaStatus = document.getElementById('iaStatus');
-let contadorProductos = 0;
-
-document.getElementById('abrirIABtn').addEventListener('click', () => {
-  iaOverlay.classList.remove('hidden');
-});
-document.getElementById('cerrarIA').addEventListener('click', () => {
-  iaOverlay.classList.add('hidden');
-});
-iaOverlay.addEventListener('click', (e) => {
-  if (e.target === iaOverlay) iaOverlay.classList.add('hidden');
-});
-
-function setIAStatus(msg, tipo) {
-  iaStatus.textContent = msg;
-  iaStatus.className = tipo || '';
-}
-
-// ---- Productos ----
-function agregarFilaProducto(nombre = '', presentacion = '', precio = '', tipo = 'empacado') {
-  contadorProductos++;
-  const id = contadorProductos;
-  const fila = document.createElement('div');
-  fila.className = 'fila-producto';
-  fila.setAttribute('data-fila-id', id);
-  fila.innerHTML = `
-    <input type="text" class="fp-nombre" placeholder="Producto (ej: Arroz Diana)" value="${nombre}">
-    <input type="text" class="fp-presentacion" placeholder="Presentación (ej: 500 gramos)" value="${presentacion}">
-    <input type="text" class="fp-precio" placeholder="Precio (ej: 7000)" value="${precio}">
-    <select class="fp-tipo">
-      <option value="empacado" ${tipo === 'empacado' ? 'selected' : ''}>Empacado</option>
-      <option value="granel" ${tipo === 'granel' ? 'selected' : ''}>A granel</option>
-    </select>
-    <button type="button">✕</button>
-  `;
-  fila.querySelector('button').addEventListener('click', () => fila.remove());
-  document.getElementById('listaProductos').appendChild(fila);
-}
-
-document.getElementById('agregarProducto').addEventListener('click', () => agregarFilaProducto());
-// Arrancar con una fila lista para usar
-agregarFilaProducto();
-
-// ---- Cargar voces desde ElevenLabs ----
-document.getElementById('cargarVoces').addEventListener('click', async () => {
-  setIAStatus('Cargando voces...', '');
-  try {
-    const res = await fetch('/.netlify/functions/voices');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const select = document.getElementById('vozSelect');
-    select.innerHTML = '';
-    if (!data.voices || data.voices.length === 0) {
-      select.innerHTML = '<option value="">No se encontraron voces</option>';
-      setIAStatus('No se encontraron voces en tu cuenta.', 'error');
-      return;
-    }
-    data.voices.forEach(v => {
-      const opt = document.createElement('option');
-      opt.value = v.voice_id;
-      opt.textContent = v.name + (v.labels && v.labels.accent ? ` (${v.labels.accent})` : '');
-      select.appendChild(opt);
-    });
-    setIAStatus(`✅ ${data.voices.length} voces cargadas.`, 'ok');
-  } catch (err) {
-    console.error(err);
-    setIAStatus('❌ No se pudo conectar con el servidor de voces. Intenta de nuevo.', 'error');
-  }
-});
-
-// ---- Generar guion (plantillas variadas, sin IA de texto, 100% gratis) ----
-const APERTURAS = [
-  (s, f) => `Atención clientes, en Mercamío${s} ${f} tenemos promociones imperdibles para ti.`,
-  (s, f) => `¡Grandes ofertas te esperan en Mercamío${s}, ${f}!`,
-  (s, f) => `Mercamío${s} tiene para ti, ${f}, las mejores promociones de la semana.`,
-  (s, f) => `Esta semana en Mercamío${s}, ${f}, aprovecha ofertas increíbles.`,
-  (s, f) => `¡Llegaron las mejores ofertas a Mercamío${s}! Válidas ${f}.`,
-  (s, f) => `Mercamío${s} te invita a aprovechar grandes promociones, ${f}.`
-];
-
-const CONECTORES = [
-  'También tenemos',
-  'No olvides llevar',
-  'Y no puede faltar',
-  'Además, aprovecha',
-  'Sin dejar atrás',
-  'Igualmente encuentras'
-];
-
-// Productos empacados (traen un peso fijo de fábrica): se cobran "por X a Y la unidad"
-const FRASES_EMPACADO = [
-  (n, p, pr) => `${n}${p ? ` por ${p}` : ''} a ${pr} pesos la unidad`,
-  (n, p, pr) => `${n}${p ? `, presentación de ${p},` : ''} a ${pr} pesos la unidad`,
-  (n, p, pr) => `${n}${p ? ` por ${p}` : ''} a solo ${pr} pesos cada unidad`
-];
-
-// Productos a granel (carnes, fruver): se cobran "a Y cada X"
-const FRASES_GRANEL = [
-  (n, p, pr) => `${n} a ${pr} pesos${p ? ` cada ${p}` : ''}`,
-  (n, p, pr) => `${n} a solo ${pr} pesos${p ? ` por cada ${p}` : ''}`,
-  (n, p, pr) => `${n}, a ${pr} pesos${p ? ` ${p}` : ''}`
-];
-
-const CIERRES = [
-  (f) => `Ven y aprovecha, promoción vigente ${f}.`,
-  (f) => `No dejes pasar esta oportunidad, válida ${f}.`,
-  (f) => `Estas ofertas solo estarán disponibles ${f}. ¡No te las pierdas!`,
-  (f) => `Aprovecha ya, oferta por tiempo limitado, ${f}.`,
-  (f) => `Te esperamos en Mercamío. Promoción ${f}.`
-];
-
-function elegir(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-function barajar(arr) {
-  const copia = [...arr];
-  for (let i = copia.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copia[i], copia[j]] = [copia[j], copia[i]];
-  }
-  return copia;
-}
-
-// ---- Convertir números a palabras en español (para que el precio siempre se lea bien) ----
-function numeroATexto(num) {
-  num = Math.round(Number(num) || 0);
-  if (num === 0) return 'cero';
-
-  const UNIDADES = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
-  const DIEZ_A_DIECINUEVE = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve'];
-  const DECENAS = ['', '', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
-  const CENTENAS = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
-
-  function menorQueMil(n) {
-    if (n === 100) return 'cien';
-    let texto = '';
-    const c = Math.floor(n / 100);
-    const resto = n % 100;
-    if (c > 0) texto += CENTENAS[c];
-    if (resto > 0) {
-      if (texto) texto += ' ';
-      if (resto < 10) {
-        texto += UNIDADES[resto];
-      } else if (resto < 20) {
-        texto += DIEZ_A_DIECINUEVE[resto - 10];
-      } else {
-        const d = Math.floor(resto / 10);
-        const u = resto % 10;
-        if (d === 2 && u > 0) {
-          texto += 'veinti' + UNIDADES[u];
-        } else {
-          texto += DECENAS[d];
-          if (u > 0) texto += ' y ' + UNIDADES[u];
-        }
-      }
-    }
-    return texto.trim();
-  }
-
-  function menorQueUnMillon(n) {
-    const miles = Math.floor(n / 1000);
-    const resto = n % 1000;
-    let texto = '';
-    if (miles > 0) texto += (miles === 1 ? 'mil' : menorQueMil(miles) + ' mil');
-    if (resto > 0) {
-      if (texto) texto += ' ';
-      texto += menorQueMil(resto);
-    }
-    return texto.trim();
-  }
-
-  let texto;
-  if (num < 1000000) {
-    texto = menorQueUnMillon(num);
-  } else {
-    const millones = Math.floor(num / 1000000);
-    const restoMillones = num % 1000000;
-    texto = millones === 1 ? 'un millón' : menorQueUnMillon(millones) + ' millones';
-    if (restoMillones > 0) texto += ' ' + menorQueUnMillon(restoMillones);
-  }
-
-  return texto.replace(/\buno$/, 'un');
-}
-
-const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-
-function partesFecha(iso) {
-  const [y, m, d] = iso.split('-');
-  return { dia: parseInt(d), mes: MESES[parseInt(m) - 1], anio: y };
-}
-
-function formatearRangoFecha(inicioISO, finISO) {
-  if (!finISO && !inicioISO) return { conectada: 'por tiempo limitado', enFrase: 'por tiempo limitado' };
-  if (finISO && !inicioISO) {
-    const f = partesFecha(finISO);
-    const texto = `hasta el ${f.dia} de ${f.mes}`;
-    return { conectada: texto, enFrase: texto };
-  }
-  if (finISO && inicioISO) {
-    const i = partesFecha(inicioISO);
-    const f = partesFecha(finISO);
-    const texto = i.mes === f.mes
-      ? `del ${i.dia} al ${f.dia} de ${f.mes}`
-      : `del ${i.dia} de ${i.mes} al ${f.dia} de ${f.mes}`;
-    return { conectada: texto, enFrase: texto };
-  }
-  return { conectada: 'por tiempo limitado', enFrase: 'por tiempo limitado' };
-}
-
-document.getElementById('generarTextoBtn').addEventListener('click', () => {
-  const filas = document.querySelectorAll('.fila-producto');
-  let productos = Array.from(filas).map(f => ({
-    nombre: f.querySelector('.fp-nombre').value.trim(),
-    presentacion: f.querySelector('.fp-presentacion').value.trim(),
-    precio: parseInt(f.querySelector('.fp-precio').value.replace(/[^\d]/g, ''), 10),
-    tipo: f.querySelector('.fp-tipo').value
-  })).filter(p => p.nombre && p.precio > 0);
-
-  if (productos.length === 0) {
-    setIAStatus('⚠️ Agrega al menos un producto con su precio.', 'error');
+// ---------- Cola de reproducción: nunca suenan dos a la vez ----------
+function encolar(a, motivo) {
+  if (sonando === a || cola.includes(a)) {
+    registrar(a, '⏭️', 'Omitido: ya estaba sonando o en fila');
     return;
   }
-
-  productos = barajar(productos);
-
-  const sede = document.getElementById('sedeInput').value.trim();
-  const sedeTexto = sede ? ` ${sede}` : '';
-  const fechaInicioISO = document.getElementById('fechaInicio').value;
-  const fechaFinISO = document.getElementById('fechaVigencia').value;
-  const rango = formatearRangoFecha(fechaInicioISO, fechaFinISO);
-
-  const apertura = elegir(APERTURAS)(sedeTexto, rango.enFrase);
-
-  const frasesProductos = productos.map((p, idx) => {
-    const set = p.tipo === 'granel' ? FRASES_GRANEL : FRASES_EMPACADO;
-    const precioTexto = numeroATexto(p.precio) + ' pesos';
-    const frase = elegir(set)(p.nombre, p.presentacion, precioTexto);
-    if (idx === 0) return frase.charAt(0).toUpperCase() + frase.slice(1);
-    return `${elegir(CONECTORES)} ${frase.charAt(0).toLowerCase() + frase.slice(1)}`;
-  });
-
-  const cierre = elegir(CIERRES)(rango.enFrase);
-
-  const guion = `${apertura} ... ${frasesProductos.join('. ')}. ... ${cierre}`;
-  document.getElementById('guionAnuncio').value = guion;
-  setIAStatus('✅ Guion generado. Puedes editarlo antes de crear el audio.', 'ok');
-});
-
-// ---- Generar audio con ElevenLabs y descargarlo ----
-document.getElementById('generarAudioBtn').addEventListener('click', async () => {
-  const voiceId = document.getElementById('vozSelect').value;
-  const texto = document.getElementById('guionAnuncio').value.trim();
-
-  if (!voiceId) { setIAStatus('⚠️ Selecciona una voz (carga voces primero).', 'error'); return; }
-  if (!texto) { setIAStatus('⚠️ Genera o escribe el guion primero.', 'error'); return; }
-
-  setIAStatus('🎙️ Generando audio, un momento...', '');
-  const btn = document.getElementById('generarAudioBtn');
-  btn.disabled = true;
-
-  try {
-    const res = await fetch('/.netlify/functions/tts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: texto, voice_id: voiceId })
-    });
-
-    if (!res.ok) {
-      const errText = await res.text();
-      throw new Error(`HTTP ${res.status}: ${errText}`);
-    }
-
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    const nombreArchivo = `anuncio_mercamio_${Date.now()}.mp3`;
-    a.href = url;
-    a.download = nombreArchivo;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
-
-    setIAStatus(`✅ Audio descargado como "${nombreArchivo}". Súbelo en una tarjeta de Audio Programado.`, 'ok');
-  } catch (err) {
-    console.error(err);
-    setIAStatus('❌ Error al generar el audio. Puede que se hayan agotado los créditos del mes.', 'error');
-  } finally {
-    btn.disabled = false;
+  cola.push(a);
+  a.motivoCola = motivo;
+  if (sonando) {
+    showNotification(`⏳ "${a.nombre}" en fila: espera a que termine "${sonando.nombre}"`, 'warn');
   }
-});
-
-// ========== INICIALIZACIÓN ==========
-
-// Crear 3 cajas iniciales
-for (let i = 0; i < 3; i++) {
-  crearAudio();
+  renderTarjeta(a);
+  procesarCola();
 }
 
-// Actualizar contador inicial
-updatePlaylistCount();
+async function procesarCola() {
+  if (sonando || !cola.length) { actualizarEstado(); return; }
+  const a = cola.shift();
+  sonando = a;
+  cola.forEach(renderTarjeta);
+  renderTarjeta(a);
+  actualizarEstado();
 
-// Optimización: Liberar memoria al cerrar
-window.addEventListener('beforeunload', () => {
-  // Limpiar todos los intervalos
-  Object.values(intervalos).forEach(clearInterval);
-  
-  // Revocar todas las URLs blob
-  document.querySelectorAll('audio').forEach(audio => {
-    if (audio.src && audio.src.startsWith('blob:')) {
-      URL.revokeObjectURL(audio.src);
+  await silenciarMusicaParaAnuncio();
+  if (sonando !== a) return; // se canceló mientras bajaba la música
+
+  a.reproduciendoSistema = true;
+  try {
+    a.audioEl.currentTime = 0;
+    a.audioEl.volume = a.volumen;
+    a.audioEl.muted = false;
+    await a.audioEl.play();
+    const retraso = a.programadoPara ? Date.now() - a.programadoPara : 0;
+    registrar(a, a.motivoCola === 'prueba' ? '🎧' : '✅',
+      a.motivoCola === 'prueba' ? 'Prueba manual' : (retraso > 5000 ? `Sonó (esperó ${Math.round(retraso / 1000)} s en fila)` : 'Sonó a tiempo'));
+  } catch (e) {
+    console.warn('Error al reproducir anuncio:', e);
+    a.reproduciendoSistema = false;
+    registrar(a, '❌', 'No se pudo reproducir (' + (e.name || 'error') + ')');
+    terminarAnuncio(a, 'error');                         // CORRECCIÓN: la música no queda pausada
+    return;
+  }
+  a.reproduciendoSistema = false;
+  a.programadoPara = null;
+
+  // Vigilante: si por algo nunca llega el evento "ended", se libera igual
+  const limite = (a.duracion ? a.duracion * 1000 : 10 * 60 * 1000) + 15000;
+  clearTimeout(a.vigilante);
+  a.vigilante = setTimeout(() => { if (sonando === a) terminarAnuncio(a, 'vigilante'); }, limite);
+}
+
+function terminarAnuncio(a, motivo) {
+  if (sonando !== a) return;
+  clearTimeout(a.vigilante);
+  sonando = null;
+  if (motivo !== 'ok' && !a.audioEl.paused) { a.reproduciendoSistema = true; a.audioEl.pause(); a.reproduciendoSistema = false; }
+  if (motivo === 'detenido') registrar(a, '⏸️', 'Detenido manualmente');
+  renderTarjeta(a);
+  actualizarEstado();
+  if (cola.length) procesarCola();
+  else reanudarMusicaTrasAnuncio();
+}
+
+// ---------- Reloj maestro ----------
+// Un Web Worker da el "pulso": los navegadores lo frenan mucho menos que un setInterval normal
+// cuando la pestaña está en segundo plano. Igual, la hora se compara contra el reloj real.
+let workerReloj = null;
+function iniciarReloj() {
+  try {
+    const codigo = 'setInterval(() => postMessage(0), 250);';
+    workerReloj = new Worker(URL.createObjectURL(new Blob([codigo], { type: 'text/javascript' })));
+    workerReloj.onmessage = tick;
+  } catch (e) {
+    setInterval(tick, 250);
+  }
+}
+
+let ultimoSegundo = 0, ultimaRevisionChoques = 0;
+function tick() {
+  if (!sistemaActivo) return;
+  const ahora = Date.now();
+
+  for (const a of anuncios) {
+    if (!a.activo || !a.proximo) continue;
+    if (ahora >= a.proximo) {
+      const retraso = ahora - a.proximo;
+      const programado = a.proximo;
+      a.proximo = calcularProximo(a, Math.max(ahora, programado) + 1);   // siguiente horario exacto
+      if (retraso <= TOLERANCIA_RETRASO_MS) {
+        a.programadoPara = programado;
+        encolar(a, 'programado');
+      } else {
+        registrar(a, '⚠️', `Omitido el de las ${horaTexto(programado, false)} (equipo suspendido o pestaña dormida)`);
+      }
+      renderTarjeta(a);
     }
+  }
+
+  const seg = Math.floor(ahora / 1000);
+  if (seg !== ultimoSegundo) {
+    ultimoSegundo = seg;
+    $('estadoReloj').textContent = horaTexto(ahora);
+    const f = new Date(ahora).toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long' });
+    $('fechaHoy').textContent = f.charAt(0).toUpperCase() + f.slice(1);
+    anuncios.forEach(a => actualizarContador(a, ahora));
+    actualizarProximoGlobal(ahora);
+  }
+  if (ahora - ultimaRevisionChoques > 30000) revisarChoques();
+}
+
+// ---------- Detector de choques ----------
+function anunciosActivosCon(reemplazo) {
+  return anuncios.filter(x => x.activo && x.id !== reemplazo.id).concat(reemplazo.activo ? [reemplazo] : []);
+}
+
+function horariosEnVentana(a, desde, hasta) {
+  const lista = [];
+  let t = calcularProximo(a, desde);
+  let guard = 0;
+  while (t && t < hasta && guard++ < 2000) {
+    lista.push(t);
+    t = calcularProximo(a, t + 1);
+  }
+  return lista;
+}
+
+const duracionDe = (a) => (a.duracion ? a.duracion * 1000 : 30000) + MARGEN_CHOQUE_MS;
+
+function buscarChoques(lista, horas = HORIZONTE_CHOQUES_H) {
+  const desde = Date.now(), hasta = desde + horas * 3600 * 1000;
+  const eventos = [];
+  lista.forEach(a => horariosEnVentana(a, desde, hasta).forEach(t => eventos.push({ a, ini: t, fin: t + duracionDe(a) })));
+  eventos.sort((x, y) => x.ini - y.ini);
+  const choques = [];
+  for (let i = 0; i < eventos.length; i++) {
+    for (let j = i + 1; j < eventos.length && eventos[j].ini < eventos[i].fin; j++) {
+      if (eventos[i].a.id !== eventos[j].a.id) choques.push({ a: eventos[i].a, b: eventos[j].a, t: eventos[j].ini });
+    }
+  }
+  return choques;
+}
+
+// Busca el corrimiento mínimo (en minutos) del audio para que no choque con ningún otro
+function sugerirAjuste(a) {
+  const otros = anuncios.filter(x => x.activo && x.id !== a.id);
+  if (!otros.length) return null;
+  const maxMin = Math.min(a.cada - 1, 59);
+  for (let m = 1; m <= maxMin; m++) {
+    for (const signo of [1, -1]) {
+      const prueba = Object.assign({}, a, { activo: true });
+      if (a.horaInicio) {
+        const base = fechaConHora(Date.now(), a.horaInicio) + signo * m * 60000;
+        prueba.horaInicio = horaTexto(base, false);
+        if (a.horaFin) prueba.horaFin = horaTexto(fechaConHora(Date.now(), a.horaFin) + signo * m * 60000, false);
+      } else {
+        prueba.ancla = (a.ancla || Date.now()) + signo * m * 60000;
+        if (signo < 0) continue; // sin hora de inicio solo se corre hacia adelante
+      }
+      const ch = buscarChoques(otros.concat([prueba])).filter(c => c.a.id === a.id || c.b.id === a.id);
+      if (!ch.length) {
+        return {
+          horaInicio: prueba.horaInicio, horaFin: prueba.horaFin, ancla: prueba.ancla,
+          descripcion: a.horaInicio ? `empezar a las ${prueba.horaInicio}` : `correr ${m} min`
+        };
+      }
+    }
+  }
+  return null;
+}
+
+function aplicarAjuste(a, ajuste) {
+  if (a.horaInicio) {
+    a.horaInicio = ajuste.horaInicio; a.ui.desde.value = a.horaInicio;
+    if (a.horaFin) { a.horaFin = ajuste.horaFin; a.ui.hasta.value = a.horaFin; }
+  } else {
+    a.ancla = ajuste.ancla;
+  }
+}
+
+function revisarChoques() {
+  ultimaRevisionChoques = Date.now();
+  const choques = buscarChoques(anuncios.filter(a => a.activo));
+  // Agrupar por pareja
+  const grupos = new Map();
+  choques.forEach(c => {
+    const [x, y] = [c.a, c.b].sort((p, q) => (p.orden || 0) - (q.orden || 0));
+    const k = x.id + '|' + y.id;
+    if (!grupos.has(k)) grupos.set(k, { x, y, veces: 0, primero: c.t });
+    const g = grupos.get(k); g.veces++; g.primero = Math.min(g.primero, c.t);
   });
+
+  anuncios.forEach(a => { if (a.archivoInvalido) return; a.ui.choque.classList.remove('visible'); a.ui.choque.textContent = ''; });
+  const lista = $('listaChoques');
+  lista.innerHTML = '';
+  if (!grupos.size) { $('panelChoques').classList.add('hidden'); actualizarEstado(); return; }
+
+  $('panelChoques').classList.remove('hidden');
+  [...grupos.values()].sort((p, q) => p.primero - q.primero).forEach(g => {
+    const falta = g.primero - Date.now();
+    const item = document.createElement('div');
+    item.className = 'choque-item' + (falta < 5 * 60000 ? ' pronto' : '');
+    const txt = document.createElement('span');
+    txt.textContent = `"${g.x.nombre}" y "${g.y.nombre}" coinciden ${g.veces === 1 ? '1 vez' : g.veces + ' veces'} · primero ${esHoy(g.primero) ? 'hoy' : 'mañana'} ${horaTexto(g.primero, false)}${falta < 5 * 60000 ? ` (en ${Math.max(1, Math.ceil(falta / 60000))} min)` : ''}`;
+    item.appendChild(txt);
+    // Se corrige el que se creó después
+    const ajuste = sugerirAjuste(g.y);
+    if (ajuste) {
+      const btn = document.createElement('button');
+      btn.className = 'boton boton-primary';
+      btn.textContent = `Corregir "${g.y.nombre}": ${ajuste.descripcion}`;
+      btn.onclick = async () => {
+        aplicarAjuste(g.y, ajuste);
+        g.y.proximo = calcularProximo(g.y, Date.now());
+        await guardarAnuncio(g.y);
+        registrar(g.y, '🛠️', `Horario ajustado para evitar choque (${ajuste.descripcion})`);
+        renderTarjeta(g.y);
+        revisarChoques();
+        showNotification('✅ Horario corregido');
+      };
+      item.appendChild(btn);
+    }
+    lista.appendChild(item);
+    [g.x, g.y].forEach(a => {
+      const otro = a === g.x ? g.y : g.x;
+      a.ui.choque.classList.add('visible');
+      a.ui.choque.textContent = `Coincide con "${otro.nombre}" a las ${horaTexto(g.primero, false)}. Sonarán uno después del otro.`;
+    });
+  });
+  actualizarEstado();
+}
+
+// ---------- Barra de estado ----------
+function actualizarEstado() {
+  const cm = $('celdaMusica'), em = $('estadoMusica');
+  const c = musica.lista[musica.actual];
+  cm.className = 'c-celda';
+  if (!musica.lista.length) em.textContent = 'Sin canciones cargadas';
+  else if (musica.intencion && anuncioEnCurso()) { em.textContent = 'En pausa durante el anuncio'; cm.classList.add('warn'); }
+  else if (musica.intencion && !musicPlayer.paused) { em.textContent = c ? c.nombre : 'Sonando'; cm.classList.add('musica-on'); }
+  else em.textContent = 'Detenida';
+
+  const ca = $('celdaAnuncio'), ea = $('estadoAnuncio');
+  ca.className = 'c-celda';
+  if (sonando) { ea.textContent = sonando.nombre + (cola.length ? ` (${cola.length} en fila)` : ''); ca.classList.add('on'); }
+  else ea.textContent = 'Nada sonando';
+  actualizarBotonPlay();
+  actualizarProximoGlobal(Date.now());
+}
+
+function actualizarProximoGlobal(ahora) {
+  const activos = anuncios.filter(a => a.activo && a.proximo);
+  const ep = $('estadoProximo');
+  if (!activos.length) { ep.textContent = 'Sin programar'; return; }
+  const sig = activos.reduce((x, y) => (y.proximo < x.proximo ? y : x));
+  ep.textContent = `${sig.nombre} en ${duracionTexto(sig.proximo - ahora)}`;
+}
+
+$('agregarAudio').addEventListener('click', async () => {
+  const a = await crearAnuncio();
+  a.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
-console.log('✅ Sistema de Audio Mercamio PRO cargado correctamente');
+// =====================================================================
+//  GENERADOR IA — solo administrador
+// =====================================================================
+function configurarIA() {
+  const btn = $('abrirIABtn');
+  if (esAdmin()) {
+    btn.textContent = 'Generador IA';
+    iniciarGeneradorIA();
+    return;
+  }
+  // Sedes: el generador no se carga; se muestra "Próximamente"
+  const overlay = $('iaOverlay');
+  if (overlay) overlay.remove();
+  btn.classList.add('boton-proximamente');
+  btn.innerHTML = 'Generador IA <span class="tag-pronto">Próximamente</span>';
+  btn.addEventListener('click', () => avisar('Generador IA: próximamente',
+    'Muy pronto podrás crear anuncios con voz profesional desde aquí: escribes los productos, el precio y la fecha, y el sistema genera el audio listo para programar.\n\nEstamos terminando de mejorarlo. ¡Gracias por la paciencia!'));
+}
+
+function iniciarGeneradorIA() {
+  // ========== GENERADOR IA (TTS con ElevenLabs) ==========
+
+  const iaOverlay = document.getElementById('iaOverlay');
+  const iaStatus = document.getElementById('iaStatus');
+  let contadorProductos = 0;
+
+  document.getElementById('abrirIABtn').addEventListener('click', () => {
+    iaOverlay.classList.remove('hidden');
+  });
+  document.getElementById('cerrarIA').addEventListener('click', () => {
+    iaOverlay.classList.add('hidden');
+  });
+  iaOverlay.addEventListener('click', (e) => {
+    if (e.target === iaOverlay) iaOverlay.classList.add('hidden');
+  });
+
+  function setIAStatus(msg, tipo) {
+    iaStatus.textContent = msg;
+    iaStatus.className = tipo || '';
+  }
+
+  // ---- Productos ----
+  function agregarFilaProducto(nombre = '', presentacion = '', precio = '', tipo = 'empacado') {
+    contadorProductos++;
+    const id = contadorProductos;
+    const fila = document.createElement('div');
+    fila.className = 'fila-producto';
+    fila.setAttribute('data-fila-id', id);
+    fila.innerHTML = `
+      <input type="text" class="fp-nombre" placeholder="Producto (ej: Arroz Diana)" value="${nombre}">
+      <input type="text" class="fp-presentacion" placeholder="Presentación (ej: 500 gramos)" value="${presentacion}">
+      <input type="text" class="fp-precio" placeholder="Precio (ej: 7000)" value="${precio}">
+      <select class="fp-tipo">
+        <option value="empacado" ${tipo === 'empacado' ? 'selected' : ''}>Empacado</option>
+        <option value="granel" ${tipo === 'granel' ? 'selected' : ''}>A granel</option>
+      </select>
+      <button type="button">✕</button>
+    `;
+    fila.querySelector('button').addEventListener('click', () => fila.remove());
+    document.getElementById('listaProductos').appendChild(fila);
+  }
+
+  document.getElementById('agregarProducto').addEventListener('click', () => agregarFilaProducto());
+  // Arrancar con una fila lista para usar
+  agregarFilaProducto();
+
+  // ---- Cargar voces desde ElevenLabs ----
+  document.getElementById('cargarVoces').addEventListener('click', async () => {
+    setIAStatus('Cargando voces...', '');
+    try {
+      const res = await api('voices');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const select = document.getElementById('vozSelect');
+      select.innerHTML = '';
+      if (!data.voices || data.voices.length === 0) {
+        select.innerHTML = '<option value="">No se encontraron voces</option>';
+        setIAStatus('No se encontraron voces en tu cuenta.', 'error');
+        return;
+      }
+      data.voices.forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v.voice_id;
+        opt.textContent = v.name + (v.labels && v.labels.accent ? ` (${v.labels.accent})` : '');
+        select.appendChild(opt);
+      });
+      setIAStatus(`✅ ${data.voices.length} voces cargadas.`, 'ok');
+    } catch (err) {
+      console.error(err);
+      setIAStatus('❌ No se pudo conectar con el servidor de voces. Intenta de nuevo.', 'error');
+    }
+  });
+
+  // ---- Generar guion (plantillas variadas, sin IA de texto, 100% gratis) ----
+  const APERTURAS = [
+    (s, f) => `Atención clientes, en Mercamío${s} ${f} tenemos promociones imperdibles para ti.`,
+    (s, f) => `¡Grandes ofertas te esperan en Mercamío${s}, ${f}!`,
+    (s, f) => `Mercamío${s} tiene para ti, ${f}, las mejores promociones de la semana.`,
+    (s, f) => `Esta semana en Mercamío${s}, ${f}, aprovecha ofertas increíbles.`,
+    (s, f) => `¡Llegaron las mejores ofertas a Mercamío${s}! Válidas ${f}.`,
+    (s, f) => `Mercamío${s} te invita a aprovechar grandes promociones, ${f}.`
+  ];
+
+  const CONECTORES = [
+    'También tenemos',
+    'No olvides llevar',
+    'Y no puede faltar',
+    'Además, aprovecha',
+    'Sin dejar atrás',
+    'Igualmente encuentras'
+  ];
+
+  // Productos empacados (traen un peso fijo de fábrica): se cobran "por X a Y la unidad"
+  const FRASES_EMPACADO = [
+    (n, p, pr) => `${n}${p ? ` por ${p}` : ''} a ${pr} pesos la unidad`,
+    (n, p, pr) => `${n}${p ? `, presentación de ${p},` : ''} a ${pr} pesos la unidad`,
+    (n, p, pr) => `${n}${p ? ` por ${p}` : ''} a solo ${pr} pesos cada unidad`
+  ];
+
+  // Productos a granel (carnes, fruver): se cobran "a Y cada X"
+  const FRASES_GRANEL = [
+    (n, p, pr) => `${n} a ${pr} pesos${p ? ` cada ${p}` : ''}`,
+    (n, p, pr) => `${n} a solo ${pr} pesos${p ? ` por cada ${p}` : ''}`,
+    (n, p, pr) => `${n}, a ${pr} pesos${p ? ` ${p}` : ''}`
+  ];
+
+  const CIERRES = [
+    (f) => `Ven y aprovecha, promoción vigente ${f}.`,
+    (f) => `No dejes pasar esta oportunidad, válida ${f}.`,
+    (f) => `Estas ofertas solo estarán disponibles ${f}. ¡No te las pierdas!`,
+    (f) => `Aprovecha ya, oferta por tiempo limitado, ${f}.`,
+    (f) => `Te esperamos en Mercamío. Promoción ${f}.`
+  ];
+
+  function elegir(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function barajar(arr) {
+    const copia = [...arr];
+    for (let i = copia.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
+    return copia;
+  }
+
+  // ---- Convertir números a palabras en español (para que el precio siempre se lea bien) ----
+  function numeroATexto(num) {
+    num = Math.round(Number(num) || 0);
+    if (num === 0) return 'cero';
+
+    const UNIDADES = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
+    const DIEZ_A_DIECINUEVE = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve'];
+    const DECENAS = ['', '', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+    const CENTENAS = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
+
+    function menorQueMil(n) {
+      if (n === 100) return 'cien';
+      let texto = '';
+      const c = Math.floor(n / 100);
+      const resto = n % 100;
+      if (c > 0) texto += CENTENAS[c];
+      if (resto > 0) {
+        if (texto) texto += ' ';
+        if (resto < 10) {
+          texto += UNIDADES[resto];
+        } else if (resto < 20) {
+          texto += DIEZ_A_DIECINUEVE[resto - 10];
+        } else {
+          const d = Math.floor(resto / 10);
+          const u = resto % 10;
+          if (d === 2 && u > 0) {
+            texto += 'veinti' + UNIDADES[u];
+          } else {
+            texto += DECENAS[d];
+            if (u > 0) texto += ' y ' + UNIDADES[u];
+          }
+        }
+      }
+      return texto.trim();
+    }
+
+    function menorQueUnMillon(n) {
+      const miles = Math.floor(n / 1000);
+      const resto = n % 1000;
+      let texto = '';
+      if (miles > 0) texto += (miles === 1 ? 'mil' : menorQueMil(miles) + ' mil');
+      if (resto > 0) {
+        if (texto) texto += ' ';
+        texto += menorQueMil(resto);
+      }
+      return texto.trim();
+    }
+
+    let texto;
+    if (num < 1000000) {
+      texto = menorQueUnMillon(num);
+    } else {
+      const millones = Math.floor(num / 1000000);
+      const restoMillones = num % 1000000;
+      texto = millones === 1 ? 'un millón' : menorQueUnMillon(millones) + ' millones';
+      if (restoMillones > 0) texto += ' ' + menorQueUnMillon(restoMillones);
+    }
+
+    return texto.replace(/\buno$/, 'un');
+  }
+
+  const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+  function partesFecha(iso) {
+    const [y, m, d] = iso.split('-');
+    return { dia: parseInt(d), mes: MESES[parseInt(m) - 1], anio: y };
+  }
+
+  function formatearRangoFecha(inicioISO, finISO) {
+    if (!finISO && !inicioISO) return { conectada: 'por tiempo limitado', enFrase: 'por tiempo limitado' };
+    if (finISO && !inicioISO) {
+      const f = partesFecha(finISO);
+      const texto = `hasta el ${f.dia} de ${f.mes}`;
+      return { conectada: texto, enFrase: texto };
+    }
+    if (finISO && inicioISO) {
+      const i = partesFecha(inicioISO);
+      const f = partesFecha(finISO);
+      const texto = i.mes === f.mes
+        ? `del ${i.dia} al ${f.dia} de ${f.mes}`
+        : `del ${i.dia} de ${i.mes} al ${f.dia} de ${f.mes}`;
+      return { conectada: texto, enFrase: texto };
+    }
+    return { conectada: 'por tiempo limitado', enFrase: 'por tiempo limitado' };
+  }
+
+  document.getElementById('generarTextoBtn').addEventListener('click', () => {
+    const filas = document.querySelectorAll('.fila-producto');
+    let productos = Array.from(filas).map(f => ({
+      nombre: f.querySelector('.fp-nombre').value.trim(),
+      presentacion: f.querySelector('.fp-presentacion').value.trim(),
+      precio: parseInt(f.querySelector('.fp-precio').value.replace(/[^\d]/g, ''), 10),
+      tipo: f.querySelector('.fp-tipo').value
+    })).filter(p => p.nombre && p.precio > 0);
+
+    if (productos.length === 0) {
+      setIAStatus('⚠️ Agrega al menos un producto con su precio.', 'error');
+      return;
+    }
+
+    productos = barajar(productos);
+
+    const sede = document.getElementById('sedeInput').value.trim();
+    const sedeTexto = sede ? ` ${sede}` : '';
+    const fechaInicioISO = document.getElementById('fechaInicio').value;
+    const fechaFinISO = document.getElementById('fechaVigencia').value;
+    const rango = formatearRangoFecha(fechaInicioISO, fechaFinISO);
+
+    const apertura = elegir(APERTURAS)(sedeTexto, rango.enFrase);
+
+    const frasesProductos = productos.map((p, idx) => {
+      const set = p.tipo === 'granel' ? FRASES_GRANEL : FRASES_EMPACADO;
+      const precioTexto = numeroATexto(p.precio) + ' pesos';
+      const frase = elegir(set)(p.nombre, p.presentacion, precioTexto);
+      if (idx === 0) return frase.charAt(0).toUpperCase() + frase.slice(1);
+      return `${elegir(CONECTORES)} ${frase.charAt(0).toLowerCase() + frase.slice(1)}`;
+    });
+
+    const cierre = elegir(CIERRES)(rango.enFrase);
+
+    const guion = `${apertura} ... ${frasesProductos.join('. ')}. ... ${cierre}`;
+    document.getElementById('guionAnuncio').value = guion;
+    setIAStatus('✅ Guion generado. Puedes editarlo antes de crear el audio.', 'ok');
+  });
+
+  // ---- Generar audio con ElevenLabs y descargarlo ----
+  document.getElementById('generarAudioBtn').addEventListener('click', async () => {
+    const voiceId = document.getElementById('vozSelect').value;
+    const texto = document.getElementById('guionAnuncio').value.trim();
+
+    if (!voiceId) { setIAStatus('⚠️ Selecciona una voz (carga voces primero).', 'error'); return; }
+    if (!texto) { setIAStatus('⚠️ Genera o escribe el guion primero.', 'error'); return; }
+
+    setIAStatus('🎙️ Generando audio, un momento...', '');
+    const btn = document.getElementById('generarAudioBtn');
+    btn.disabled = true;
+
+    try {
+      const res = await api('tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: texto, voice_id: voiceId })
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`HTTP ${res.status}: ${errText}`);
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const nombreArchivo = `anuncio_mercamio_${Date.now()}.mp3`;
+      a.href = url;
+      a.download = nombreArchivo;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+
+      setIAStatus(`✅ Audio descargado como "${nombreArchivo}". Súbelo en una tarjeta de Audio Programado.`, 'ok');
+    } catch (err) {
+      console.error(err);
+      setIAStatus('❌ Error al generar el audio. Puede que se hayan agotado los créditos del mes.', 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}
+
+// ========== ARRANQUE ==========
+arrancar();
 </script>
 </body>
 </html>
