@@ -1,4 +1,9 @@
-exports.handler = async function () {
+const { exigirAdmin } = require('../lib/auth');
+
+exports.handler = async function (event) {
+  const denegado = exigirAdmin(event);
+  if (denegado) return denegado;
+
   const apiKey = process.env.ELEVENLABS_API_KEY;
 
   if (!apiKey) {

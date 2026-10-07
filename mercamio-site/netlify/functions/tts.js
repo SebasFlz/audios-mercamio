@@ -1,7 +1,12 @@
+const { exigirAdmin } = require('../lib/auth');
+
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method not allowed' };
   }
+
+  const denegado = exigirAdmin(event);
+  if (denegado) return denegado;
 
   const apiKey = process.env.ELEVENLABS_API_KEY;
   if (!apiKey) {
